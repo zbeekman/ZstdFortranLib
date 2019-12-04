@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block footer %}
+
+
+<hr><p style="text-align:right;"><small>
+{% if page.meta.revision_date %}
+<i>Updated {{ page.meta.revision_date }}</i>
+{% endif %}
+{% if config.copyright %}
+<span style="float:left;">
+{{ config.copyright }}
+</span>
+{% endif %}
+{% if page.meta.revision_date %}
+<br>
+{% endif %}
+Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.
+</small></p>
+{% endblock %}

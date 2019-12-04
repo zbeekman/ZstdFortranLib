@@ -1,0 +1,35 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+cmake = ">=3.13.4"
+jin2for = ">=0.1.0"
+pre-commit = ">=1.20.0"
+mkdocs = "*"
+ford = "*"
+graphviz = "*"
+lxml = "*"
+pymdown-extensions = "*"
+mkdocs-htmlproofer-plugin = "*"
+mkdocs-git-revision-date-plugin = "*"
+mkdocs-minify-plugin = "*"
+mkdocs-exclude = "*"
+mkdocs-redirects = "*"
+
+[packages]
+
+[requires]
+python_version = "3"
+
+[scripts]
+configure = "bash -c \"cd \\\"$(pipenv --where)\\\"; cmake -Wdev -Wdeprecated --warn-uninitialized -G \\\"Unix Makefiles\\\" -B \\\"${BUILD_DIR:-./build}\\\" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ; exit $?\""
+gather_logs = "bash -c \"cd \\\"$(pipenv --where)\\\"; mkdir -p \\\"${GITHUB_WORKSPACE:-$(pwd)}\\\"/logs || true ; cp \\\"${BUILD_DIR:-./build}\\\"/CMakeFiles/CMake{Output,Error}.log \\\"${GITHUB_WORKSPACE:-\\\"$(pwd)\\\"}\\\"/logs/\""
+build = "bash -c \"cd \\\"$(pipenv --where)\\\"; cmake --build \\\"${BUILD_DIR:-./build}\\\" --parallel ${CMAKE_BUILD_PARALLEL_LEVEL:-${NCPU:-$(ncpu || echo 8)}} -- -k ; exit $?\""
+clean_build = "bash -c \"cd \\\"$(pipenv --where)\\\"; cmake --build \\\"${BUILD_DIR:-./build}\\\" --parallel ${CMAKE_BUILD_PARALLEL_LEVEL:-${NCPU:-$(ncpu || echo 8)}} -- -k ; exit $?\""
+verbose_build = "bash -c \"cd \\\"$(pipenv --where)\\\"; VERBOSE=1 cmake --build \\\"${BUILD_DIR:-./build}\\\" -- -k ; exit $?\""
+install = "bash -c \"cd \\\"$(pipenv --where)\\\"; cmake --install \\\"${BUILD_DIR:-./build}\\\" ; exit $?\""
+unit_test = "bash -c \"cd \\\"${BUILD_DIR:-$(pipenv --where)/build}\\\" ; ctest --output-on-failure --schedule-random -L unit ; exit $?\""
+integration_test = "bash -c \"cd \\\"${BUILD_DIR:-$(pipenv --where)/build}\\\" ; ctest --output-on-failure --schedule-random -LE unit ; exit $?\""
+nuke_build = "bash -c \"rm -rf \\\"${BUILD_DIR:-$(pipenv --where)/build}\\\"\""

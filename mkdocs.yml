@@ -1,0 +1,65 @@
+site_name: ZstdFortranLib
+site_description: "Documentation for ZstdFortranLib, Zaak's standard Fortran library"
+site_author: "Izaak Beekman"
+docs_dir: docs
+copyright: "Copyright © 2019 Izaak Beekman"
+repo_url: https://github.com/zbeekman/ZstdFortranLib
+theme:
+  name: readthedocs
+  custom_dir: docs/custom
+  hljs_languages:
+    - yaml
+    - c
+    - bash
+    - shell
+    - markdown
+    - fortran
+extra_javascript:
+  - 'https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js'
+  - js/strictkatex.js
+extra_css:
+  - 'https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css'
+plugins:
+  - exclude:
+      glob:
+        - docs/README.md
+        - ./README.md
+  - git-revision-date
+  - htmlproofer
+  - minify:
+      minify_html: True
+      minify_js: True
+  - redirects:
+      redirect_maps:
+        'User-API-Documentation.md': https://izaakbeekman.com/ZstdFortranLib/user/
+        'Developer-API-Documentation.md': https://izaakbeekman.com/ZstdFortranLib/developer/
+  - search
+markdown_extensions:
+  - markdown.extensions.toc:
+      permalink: True
+      toc_depth: 3
+  - markdown.extensions.abbr
+  - markdown.extensions.admonition
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.sane_lists
+  - pymdownx.arithmatex:
+      generic: True
+  - pymdownx.caret:
+      insert: False
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:pymdownx.emoji.gemoji
+      emoji_generator: !!python/name:pymdownx.emoji.to_png
+      alt: "short"
+  - pymdownx.keys:
+      camel_case: True
+  - pymdownx.magiclink:
+      repo_url_shortener: True
+      repo_url_shorthand: True
+      provider: "github"
+      user: "zbeekman"
+      repo: "ZstdFortranLib"
+  - pymdownx.tasklist
+  - pymdownx.tilde:
+      subscript: False
