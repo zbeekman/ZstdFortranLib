@@ -49,8 +49,6 @@ markdown_extensions:
       insert: False
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_index: !!python/name:pymdownx.emoji.gemoji
-      emoji_generator: !!python/name:pymdownx.emoji.to_png
       alt: "short"
   - pymdownx.keys:
       camel_case: True
