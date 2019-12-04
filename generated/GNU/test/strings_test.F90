@@ -549,7 +549,7 @@ contains
       failures = failures + 1
       write(*,"(A)",ADVANCE="NO") "Expected output: "
       write(*,"(A)") expected
-      write(*,"(A)",ADVANCE="NO") "Acual output:    "
+      write(*,"(A)",ADVANCE="NO") "Actual output:    "
       write(*,"(A)") input
     end if
   end subroutine
@@ -560,7 +560,7 @@ contains
       failures = failures + 1
       write(*,"(A)",ADVANCE="NO") "Expected output: "
       write(*,"(A)") expected
-      write(*,"(A)",ADVANCE="NO") "Acual output:    "
+      write(*,"(A)",ADVANCE="NO") "Actual output:    "
       write(*,"(A)") input
     end if
   end subroutine

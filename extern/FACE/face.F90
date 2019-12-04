@@ -241,7 +241,7 @@ contains
    elemental function color_index(color)
    !< Return the array-index corresponding to the queried color.
    !<
-   !< @note Because Foreground and backround colors lists share the same name, no matter what array is used to find the color index.
+   !< @note Because Foreground and background colors lists share the same name, no matter what array is used to find the color index.
    !< Thus, the foreground array is used.
    character(len=*), intent(in) :: color       !< Color definition.
    integer(int32)               :: color_index !< Index into the colors arrays.

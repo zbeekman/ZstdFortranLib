@@ -138,7 +138,7 @@ jobs:
 
     - name: unit test
       run: pipenv run unit_test
-      
+
     - name: Codecov
       uses: codecov/codecov-action@v1.0.4
       with:

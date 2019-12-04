@@ -4,7 +4,7 @@ Please review the [Code of conduct] before starting.
 
 ## Reporting Defects
 
-Please open a [new issue] and select the appropriate type of issue (Reproducable Bug
+Please open a [new issue] and select the appropriate type of issue (Reproducible Bug
 Report). Then fill out the issue template completely. Skipping this may result in the
 issue being closed without comment.
 
@@ -43,7 +43,7 @@ To contribute, please follow these steps:
    In general, please follow the guidelines
    [here](https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message) and
    please don't use commit messages like those found on https://whatthecommit.com/.
-4. Once you're happy with your contributions or ready to recieve feedback, please push
+4. Once you're happy with your contributions or ready to receive feedback, please push
    your local changes to your fork, then [open a pull request]. Please ensure you fill
    out the pull request template.
 5. We will consider and review your proposed contribution, and may ask for additional

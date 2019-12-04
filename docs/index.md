@@ -94,7 +94,7 @@ To finish setting up the development environment and pre-requisites follow these
 # Building `ZstdFortranLib`
 
 The build system for `ZstdFortranLib` is a normal [CMake] based build system. However, at this time
-the build system is focussed on contributors and developers. Until the non-developer, user focussed
+the build system is focused on contributors and developers. Until the non-developer, user focused
 build system is finished, as discussed [above](#prerequisites), everyone
 must follow the developer build instructions.
 

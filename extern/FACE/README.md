@@ -29,4 +29,4 @@ directory.
 [Stefano Zaghi (@szaghi)]: https://github.com/szaghi
 [OSI approved]: https://opensource.org/licenses/category
 [parent project's licensing]: ../LICENSE
-[Documenation]: http://szaghi.github.io/FACE/index.html
+[Documentation]: http://szaghi.github.io/FACE/index.html

@@ -5,8 +5,7 @@ function(set_config_types)
   set(options STRICT)
   set(oneValueArgs DEFAULT_DEV_CONFIG DEFAULT_RELEASE_CONFIG)
   set(multiValueArgs CONFIGS)
-  cmake_parse_arguments(my_conf "${options}" "${oneValueArgs}"
-    "${multiValueArgs}" ${ARGN} )
+  cmake_parse_arguments(my_conf "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
   if(NOT my_conf_STRICT) # add default build types
     set(build_types "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
@@ -14,8 +13,7 @@ function(set_config_types)
 
   # Handle strict case, CONFIGS required!
   if(my_conf_STRICT AND NOT my_conf_CONFIGS)
-    message(FATAL_ERROR
-      "List of valid configurations must be passed to `set_config_type()` when `STRICT` is set.")
+    message(FATAL_ERROR "List of valid configurations must be passed to `set_config_type()` when `STRICT` is set.")
   elseif(my_conf_CONFIGS)
     # If CONFIGS is present add them to possible builds list
     set(build_types ${build_types} ${my_conf_CONFIGS})
@@ -42,23 +40,28 @@ function(set_config_types)
 
   # Check if we're using an IDE
   get_property(isMultiConfig GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-  set(IS_MULTI_CONFIG ${isMultiConfig} PARENT_SCOPE)
+  set(IS_MULTI_CONFIG
+      ${isMultiConfig}
+      PARENT_SCOPE
+      )
 
   # If use did not specify build type and not an IDE:
   if(NOT CMAKE_BUILD_TYPE AND NOT IS_MULTI_CONFIG)
-    message(STATUS
-      "Setting build type to '${default_build_type}', use `-DCMAKE_BUILD_TYPE=<type>` or set with ccmake/cmake-gui to override.")
-    set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE
-      STRING "Choose the type of build." FORCE)
+    message(
+      STATUS
+        "Setting build type to '${default_build_type}', use `-DCMAKE_BUILD_TYPE=<type>` or set with ccmake/cmake-gui to override."
+      )
+    set(CMAKE_BUILD_TYPE
+        "${default_build_type}"
+        CACHE STRING "Choose the type of build." FORCE
+        )
     # Set the possible values of build type for cmake-gui
-    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
-      ${build_types})
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${build_types})
   endif()
 
   if(my_conf_STRICT)
     if(NOT CMAKE_BUILD_TYPE IN_LIST build_types)
-      message(FATAL_ERROR
-        "Invalid build type: ${CMAKE_BUILD_TYPE}, strict enforcement is ON!")
+      message(FATAL_ERROR "Invalid build type: ${CMAKE_BUILD_TYPE}, strict enforcement is ON!")
     endif()
   endif()
 endfunction()

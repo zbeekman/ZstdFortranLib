@@ -1,7 +1,8 @@
-#include <unistd.h>   // for isatty()
-#include <stdio.h>    // for fileno()
+#include <stdio.h>  // for fileno()
+#include <unistd.h> // for isatty()
 
-_Bool is_a_tty()
+_Bool
+is_a_tty ()
 {
-  return isatty(fileno(stdout));
+  return isatty (fileno (stdout));
 }

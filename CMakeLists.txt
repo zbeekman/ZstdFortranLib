@@ -15,21 +15,21 @@ message(STATUS "GIT_COMMIT: ${GIT_FULL_DESCRIBE}")
 
 # Set default configuration types
 include(SetConfigTypes)
-set_config_types( DEFAULT_DEV_CONFIG RelWithDebInfo
-  CONFIGS RuntimeDebug CodeCoverage)
+set_config_types(DEFAULT_DEV_CONFIG RelWithDebInfo CONFIGS RuntimeDebug CodeCoverage)
 
 # Use relative install rpaths and don't use build rpaths: Setup build directory to match install directory
 include(RelocatableReproducibleHelper)
 
 # Set some default compiler flags per compiler/language
-set(CMAKE_USER_MAKE_RULES_OVERRIDE
-  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/config_defaults.cmake)
+set(CMAKE_USER_MAKE_RULES_OVERRIDE ${CMAKE_CURRENT_SOURCE_DIR}/cmake/config_defaults.cmake)
 
-project(ZstdFortranLib
+project(
+  ZstdFortranLib
   VERSION 0.0.1
   DESCRIPTION "Zaak's (missing) Standard Fortran Library"
   HOMEPAGE_URL "https://izaakbeekman.com"
-  LANGUAGES Fortran C)
+  LANGUAGES Fortran C
+  )
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   include(CTest)

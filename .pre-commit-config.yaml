@@ -1,4 +1,5 @@
 default_stages: [manual, commit]
+fail_fast: false
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v2.4.0
@@ -32,8 +33,10 @@ repos:
     - id: script-must-have-extension
       types: [shell, non-executable]
     - id: shellcheck
-      args: [-a, -x]
+      args: [--color=always, -a, -x]
+      additional_dependencies: [shellcheck]
     - id: shfmt
+      additional_dependencies: [shfmt]
 - repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
   rev: v1.1.0
   hooks:
@@ -44,3 +47,27 @@ repos:
   rev: v0.0.16
   hooks:
   - id: circleci-config-validate
+- repo: https://github.com/cheshirekow/cmake-format-precommit
+  rev: v0.6.2
+  hooks:
+    - id: cmake-format
+      types: [cmake]
+      args: [-i]
+- repo: https://github.com/codespell-project/codespell.git
+  rev: v1.16.0
+  hooks:
+    - id: codespell
+      args: ['-L', 'ot']
+- repo: https://github.com/zbeekman/pre-commit-hooks
+  rev: zbeekman-macOS-patch
+  hooks:
+    - id: clang-tidy
+      args: [--header-filter=.*, --fix, --fix-errors]
+    - id: oclint
+      args: [-enable-clang-static-analyzer, -enable-global-analysis]
+- repo: git://github.com/doublify/pre-commit-clang-format
+  rev: master
+  hooks:
+    - id: clang-format
+      args: [-style=file,-fallback-style=none,-i]
+      files: \.(c|cc|cxx|cpp|h|hpp|hxx)$
