@@ -138,6 +138,13 @@ jobs:
 
     - name: unit test
       run: pipenv run unit_test
+      
+    - name: Codecov
+      uses: codecov/codecov-action@v1.0.4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        name: ${{ runner.os }}-${{ matrix.gcc }}
+        flag: unittests
 
     - name: integration test
       run: pipenv run integration_test
