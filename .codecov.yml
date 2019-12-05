@@ -1,0 +1,52 @@
+codecov:
+  require_ci_to_pass: yes
+
+coverage:
+  precision: 2
+  round: nearest
+  range: "60...98"
+  status:
+    project:
+      default: off
+      unittest_core: &unit_core
+        flags: unittest_core
+        target: 95%
+        paths: &core_paths
+          - "!**/test/*"
+          - "!**/*_test.*"
+          - generated/GNU/
+          - src/
+      unittest_extern: &unit_extern
+        flags: unittest_extern
+        target: auto
+        threshold: 5%
+        paths: &extern_paths
+          - extern/
+      unittest_tests: &unit_tests
+        flags: unittest_tests
+        target: auto
+        threshold: 2%
+        paths: &tests_paths
+          - "**/test/*"
+          - "**/*_test.*"
+
+flags:
+  # filter the folder(s) you wish to measure by that flag
+  unittest_core:
+    paths:
+      - "!**/test/*"
+      - "!**/*_test.*"
+      - generated/GNU/
+      - src/
+  unittest_extern:
+    paths:
+      - extern/
+  unittest_tests:
+    paths:
+      - "**/test/*"
+      - "**/*_test.*"
+
+comment:
+  layout: "reach, diff, flags, files, tree"
+  behavior: default
+  branches: [master, develop]

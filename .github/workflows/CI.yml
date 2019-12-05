@@ -137,14 +137,27 @@ jobs:
       run: pipenv run build || pipenv run verbose_build
 
     - name: unit test
-      run: pipenv run unit_test
-
-    - name: Codecov
-      uses: codecov/codecov-action@v1.0.4
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        name: ${{ runner.os }}-${{ matrix.gcc }}
-        flag: unittests
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: |
+        pipenv run unit_test
+        bash <(curl -s https://codecov.io/bash) -v \
+          -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
+          -c -F unittest_core \
+          -n "GHA-GCC${GCC_V}-${{ runner.os }}"
+        bash <(curl -s https://codecov.io/bash) -v \
+          -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
+          -c -F extern-unit \
+          -n "GHA-GCC${GCC_V}-${{ runner.os }}"
 
     - name: integration test
-      run: pipenv run integration_test
+      run: |
+        pipenv run integration_test
+        # bash <(curl -s https://codecov.io/bash) -v \
+        #   -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
+        #   -c -F integrationtests \
+        #   -n "GHA-GCC${GCC_V}-${{ runner.os }}"
+        # bash <(curl -s https://codecov.io/bash) -v \
+        #   -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
+        #   -c -F extern-integration \
+        #   -n "GHA-GCC${GCC_V}-${{ runner.os }}"
