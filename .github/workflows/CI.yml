@@ -141,23 +141,19 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: |
         pipenv run unit_test
-        bash <(curl -s https://codecov.io/bash) -v \
-          -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
-          -c -F unittest_core \
-          -n "GHA-GCC${GCC_V}-${{ runner.os }}"
-        bash <(curl -s https://codecov.io/bash) -v \
-          -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
-          -c -F extern-unit \
-          -n "GHA-GCC${GCC_V}-${{ runner.os }}"
+        for flag in core extern tests ; do
+          bash <(curl -s https://codecov.io/bash) \
+            -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
+            -c -F unittest_${flag} \
+            -n "GHA-GCC${GCC_V}-${{ runner.os }}"
+        done
 
     - name: integration test
       run: |
         pipenv run integration_test
-        # bash <(curl -s https://codecov.io/bash) -v \
-        #   -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
-        #   -c -F integrationtests \
-        #   -n "GHA-GCC${GCC_V}-${{ runner.os }}"
-        # bash <(curl -s https://codecov.io/bash) -v \
-        #   -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
-        #   -c -F extern-integration \
-        #   -n "GHA-GCC${GCC_V}-${{ runner.os }}"
+        # for flag in core extern tests ; do
+        #   bash <(curl -s https://codecov.io/bash) \
+        #     -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
+        #     -c -F integrationtest_${flag} \
+        #     -n "GHA-GCC${GCC_V}-${{ runner.os }}"
+        # done

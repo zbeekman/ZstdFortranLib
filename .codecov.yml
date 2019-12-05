@@ -1,3 +1,6 @@
+ignore:
+  - "generated/*/testing.F90"
+
 codecov:
   require_ci_to_pass: yes
 
@@ -29,6 +32,11 @@ coverage:
         paths: &tests_paths
           - "**/test/*"
           - "**/*_test.*"
+    patch:
+      default: off
+      unittest_core: *unit_core
+      unittest_extern: *unit_extern
+      unittest_tests: *unit_tests
 
 flags:
   # filter the folder(s) you wish to measure by that flag
