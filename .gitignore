@@ -36,3 +36,6 @@ build*/**
 
 # mkdocs generated documentation sites
 site
+
+# Node modules
+node_modules
