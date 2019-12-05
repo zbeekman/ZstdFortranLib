@@ -1,0 +1,33 @@
+{
+  "name": "zstdfortranlib",
+  "version": "0.1.0",
+  "description": "Zaak's (missing) Standard Fortran Library",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cm": "git-cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbeekman/ZstdFortranLib.git"
+  },
+  "author": "Izaak Beekman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zbeekman/ZstdFortranLib/issues"
+  },
+  "homepage": "https://github.com/zbeekman/ZstdFortranLib#readme",
+  "devDependencies": {
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.0.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog",
+      "maxHeaderWidth": 50,
+      "maxLineWidth": 100
+    }
+  }
+}

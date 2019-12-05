@@ -45,9 +45,9 @@ words=wip
 # (e.g. title-must-not-contain-word).
 # regex=^US[0-9]*
 
-# [B1]
+[B1]
 # B1 = body-max-line-length
-# line-length=120
+line-length=100
 
 # [body-min-length]
 # min-length=5
@@ -90,4 +90,4 @@ words=wip
 
 [contrib-title-conventional-commits]
 # Specify allowed commit types. For details see: https://www.conventionalcommits.org/
-types = fix,feat,build,chore,ci,docs,style,refactor,perf,test,revert
+types = fix,feat,improvement,build,chore,ci,docs,style,refactor,perf,test,revert
