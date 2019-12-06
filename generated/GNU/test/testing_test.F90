@@ -47,120 +47,52 @@ program testing_test
     one_hundred => one_hundred_r4, &
     tolerance   => tolerance_r4, &
     rtolerance  => rtolerance_r4)
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. real(tolerance, kind=4)
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=4)
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=4)
-    test = .not. ((10.0_r4 .is. one_hundred) .within. real(tolerance, kind=4))
-    test = .not. ((10.0_r4 .is. one_hundred) .within. .absolute. real(tolerance, kind=4))
-    test = .not. ((10.0_r4 .is. one_hundred) .within. .relative. real(rtolerance, kind=4))
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. real(tolerance, kind=8)
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=8)
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=8)
-    test = .not. ((10.0_r4 .is. one_hundred) .within. real(tolerance, kind=8))
-    test = .not. ((10.0_r4 .is. one_hundred) .within. .absolute. real(tolerance, kind=8))
-    test = .not. ((10.0_r4 .is. one_hundred) .within. .relative. real(rtolerance, kind=8))
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. real(tolerance, kind=10)
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=10)
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=10)
-    test = .not. ((10.0_r4 .is. one_hundred) .within. real(tolerance, kind=10))
-    test = .not. ((10.0_r4 .is. one_hundred) .within. .absolute. real(tolerance, kind=10))
-    test = .not. ((10.0_r4 .is. one_hundred) .within. .relative. real(rtolerance, kind=10))
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. real(tolerance, kind=16)
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=16)
-    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=16)
-    test = .not. ((10.0_r4 .is. one_hundred) .within. real(tolerance, kind=16))
-    test = .not. ((10.0_r4 .is. one_hundred) .within. .absolute. real(tolerance, kind=16))
-    test = .not. ((10.0_r4 .is. one_hundred) .within. .relative. real(rtolerance, kind=16))
+
+    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. tolerance
+    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. .absolute. tolerance
+    test = ( (100 - 10*epsilon(1.0_r4)) .is. one_hundred ) .within. .relative. rtolerance
+    test = .not. ((10.0_r4 .is. one_hundred) .within. tolerance)
+    test = .not. ((10.0_r4 .is. one_hundred) .within. .absolute. tolerance)
+    test = .not. ((10.0_r4 .is. one_hundred) .within. .relative. rtolerance)
   end associate
   !> Test real(8) interfaces
   associate( &
     one_hundred => one_hundred_r8, &
     tolerance   => tolerance_r8, &
     rtolerance  => rtolerance_r8)
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. real(tolerance, kind=4)
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=4)
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=4)
-    test = .not. ((10.0_r8 .is. one_hundred) .within. real(tolerance, kind=4))
-    test = .not. ((10.0_r8 .is. one_hundred) .within. .absolute. real(tolerance, kind=4))
-    test = .not. ((10.0_r8 .is. one_hundred) .within. .relative. real(rtolerance, kind=4))
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. real(tolerance, kind=8)
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=8)
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=8)
-    test = .not. ((10.0_r8 .is. one_hundred) .within. real(tolerance, kind=8))
-    test = .not. ((10.0_r8 .is. one_hundred) .within. .absolute. real(tolerance, kind=8))
-    test = .not. ((10.0_r8 .is. one_hundred) .within. .relative. real(rtolerance, kind=8))
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. real(tolerance, kind=10)
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=10)
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=10)
-    test = .not. ((10.0_r8 .is. one_hundred) .within. real(tolerance, kind=10))
-    test = .not. ((10.0_r8 .is. one_hundred) .within. .absolute. real(tolerance, kind=10))
-    test = .not. ((10.0_r8 .is. one_hundred) .within. .relative. real(rtolerance, kind=10))
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. real(tolerance, kind=16)
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=16)
-    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=16)
-    test = .not. ((10.0_r8 .is. one_hundred) .within. real(tolerance, kind=16))
-    test = .not. ((10.0_r8 .is. one_hundred) .within. .absolute. real(tolerance, kind=16))
-    test = .not. ((10.0_r8 .is. one_hundred) .within. .relative. real(rtolerance, kind=16))
+
+    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. tolerance
+    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. .absolute. tolerance
+    test = ( (100 - 10*epsilon(1.0_r8)) .is. one_hundred ) .within. .relative. rtolerance
+    test = .not. ((10.0_r8 .is. one_hundred) .within. tolerance)
+    test = .not. ((10.0_r8 .is. one_hundred) .within. .absolute. tolerance)
+    test = .not. ((10.0_r8 .is. one_hundred) .within. .relative. rtolerance)
   end associate
   !> Test real(10) interfaces
   associate( &
     one_hundred => one_hundred_r10, &
     tolerance   => tolerance_r10, &
     rtolerance  => rtolerance_r10)
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. real(tolerance, kind=4)
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=4)
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=4)
-    test = .not. ((10.0_r10 .is. one_hundred) .within. real(tolerance, kind=4))
-    test = .not. ((10.0_r10 .is. one_hundred) .within. .absolute. real(tolerance, kind=4))
-    test = .not. ((10.0_r10 .is. one_hundred) .within. .relative. real(rtolerance, kind=4))
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. real(tolerance, kind=8)
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=8)
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=8)
-    test = .not. ((10.0_r10 .is. one_hundred) .within. real(tolerance, kind=8))
-    test = .not. ((10.0_r10 .is. one_hundred) .within. .absolute. real(tolerance, kind=8))
-    test = .not. ((10.0_r10 .is. one_hundred) .within. .relative. real(rtolerance, kind=8))
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. real(tolerance, kind=10)
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=10)
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=10)
-    test = .not. ((10.0_r10 .is. one_hundred) .within. real(tolerance, kind=10))
-    test = .not. ((10.0_r10 .is. one_hundred) .within. .absolute. real(tolerance, kind=10))
-    test = .not. ((10.0_r10 .is. one_hundred) .within. .relative. real(rtolerance, kind=10))
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. real(tolerance, kind=16)
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=16)
-    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=16)
-    test = .not. ((10.0_r10 .is. one_hundred) .within. real(tolerance, kind=16))
-    test = .not. ((10.0_r10 .is. one_hundred) .within. .absolute. real(tolerance, kind=16))
-    test = .not. ((10.0_r10 .is. one_hundred) .within. .relative. real(rtolerance, kind=16))
+
+    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. tolerance
+    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. .absolute. tolerance
+    test = ( (100 - 10*epsilon(1.0_r10)) .is. one_hundred ) .within. .relative. rtolerance
+    test = .not. ((10.0_r10 .is. one_hundred) .within. tolerance)
+    test = .not. ((10.0_r10 .is. one_hundred) .within. .absolute. tolerance)
+    test = .not. ((10.0_r10 .is. one_hundred) .within. .relative. rtolerance)
   end associate
   !> Test real(16) interfaces
   associate( &
     one_hundred => one_hundred_r16, &
     tolerance   => tolerance_r16, &
     rtolerance  => rtolerance_r16)
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. real(tolerance, kind=4)
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=4)
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=4)
-    test = .not. ((10.0_r16 .is. one_hundred) .within. real(tolerance, kind=4))
-    test = .not. ((10.0_r16 .is. one_hundred) .within. .absolute. real(tolerance, kind=4))
-    test = .not. ((10.0_r16 .is. one_hundred) .within. .relative. real(rtolerance, kind=4))
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. real(tolerance, kind=8)
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=8)
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=8)
-    test = .not. ((10.0_r16 .is. one_hundred) .within. real(tolerance, kind=8))
-    test = .not. ((10.0_r16 .is. one_hundred) .within. .absolute. real(tolerance, kind=8))
-    test = .not. ((10.0_r16 .is. one_hundred) .within. .relative. real(rtolerance, kind=8))
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. real(tolerance, kind=10)
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=10)
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=10)
-    test = .not. ((10.0_r16 .is. one_hundred) .within. real(tolerance, kind=10))
-    test = .not. ((10.0_r16 .is. one_hundred) .within. .absolute. real(tolerance, kind=10))
-    test = .not. ((10.0_r16 .is. one_hundred) .within. .relative. real(rtolerance, kind=10))
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. real(tolerance, kind=16)
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. .absolute. real(tolerance, kind=16)
-    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. .relative. real(rtolerance, kind=16)
-    test = .not. ((10.0_r16 .is. one_hundred) .within. real(tolerance, kind=16))
-    test = .not. ((10.0_r16 .is. one_hundred) .within. .absolute. real(tolerance, kind=16))
-    test = .not. ((10.0_r16 .is. one_hundred) .within. .relative. real(rtolerance, kind=16))
+
+    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. tolerance
+    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. .absolute. tolerance
+    test = ( (100 - 10*epsilon(1.0_r16)) .is. one_hundred ) .within. .relative. rtolerance
+    test = .not. ((10.0_r16 .is. one_hundred) .within. tolerance)
+    test = .not. ((10.0_r16 .is. one_hundred) .within. .absolute. tolerance)
+    test = .not. ((10.0_r16 .is. one_hundred) .within. .relative. rtolerance)
   end associate
 
   call test%report_status()

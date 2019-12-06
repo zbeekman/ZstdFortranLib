@@ -160,42 +160,52 @@ call use_color(.true.)
     block
       logical(1) :: bool
       bool = .true.
-    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
-      __LINE__ , "character(1) concat logical(1)")
-    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
-      __LINE__ , "logical(1) concat character(1)")
+      OUTPUT_ = _CK_".true. = " // bool
+      call assert_delayed( OUTPUT_ == _CK_".true. = true", &
+        __LINE__ , "character(1) concat logical(1)")
+      OUTPUT_ = bool // _CK_" = .true."
+      call assert_delayed( OUTPUT_ == _CK_"true = .true.", &
+        __LINE__ , "logical(1) concat character(1)")
     end block
     block
       logical(2) :: bool
       bool = .true.
-    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
-      __LINE__ , "character(1) concat logical(2)")
-    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
-      __LINE__ , "logical(2) concat character(1)")
+      OUTPUT_ = _CK_".true. = " // bool
+      call assert_delayed( OUTPUT_ == _CK_".true. = true", &
+        __LINE__ , "character(1) concat logical(2)")
+      OUTPUT_ = bool // _CK_" = .true."
+      call assert_delayed( OUTPUT_ == _CK_"true = .true.", &
+        __LINE__ , "logical(2) concat character(1)")
     end block
     block
       logical(4) :: bool
       bool = .true.
-    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
-      __LINE__ , "character(1) concat logical(4)")
-    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
-      __LINE__ , "logical(4) concat character(1)")
+      OUTPUT_ = _CK_".true. = " // bool
+      call assert_delayed( OUTPUT_ == _CK_".true. = true", &
+        __LINE__ , "character(1) concat logical(4)")
+      OUTPUT_ = bool // _CK_" = .true."
+      call assert_delayed( OUTPUT_ == _CK_"true = .true.", &
+        __LINE__ , "logical(4) concat character(1)")
     end block
     block
       logical(8) :: bool
       bool = .true.
-    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
-      __LINE__ , "character(1) concat logical(8)")
-    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
-      __LINE__ , "logical(8) concat character(1)")
+      OUTPUT_ = _CK_".true. = " // bool
+      call assert_delayed( OUTPUT_ == _CK_".true. = true", &
+        __LINE__ , "character(1) concat logical(8)")
+      OUTPUT_ = bool // _CK_" = .true."
+      call assert_delayed( OUTPUT_ == _CK_"true = .true.", &
+        __LINE__ , "logical(8) concat character(1)")
     end block
     block
       logical(16) :: bool
       bool = .true.
-    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
-      __LINE__ , "character(1) concat logical(16)")
-    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
-      __LINE__ , "logical(16) concat character(1)")
+      OUTPUT_ = _CK_".true. = " // bool
+      call assert_delayed( OUTPUT_ == _CK_".true. = true", &
+        __LINE__ , "character(1) concat logical(16)")
+      OUTPUT_ = bool // _CK_" = .true."
+      call assert_delayed( OUTPUT_ == _CK_"true = .true.", &
+        __LINE__ , "logical(16) concat character(1)")
     end block
 
     associate( msg => "character(1) conversion to integer failed")
@@ -333,42 +343,52 @@ call use_color(.true.)
     block
       logical(1) :: bool
       bool = .true.
-    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
-      __LINE__ , "character(4) concat logical(1)")
-    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
-      __LINE__ , "logical(1) concat character(4)")
+      OUTPUT_ = _CK_".true. = " // bool
+      call assert_delayed( OUTPUT_ == _CK_".true. = true", &
+        __LINE__ , "character(4) concat logical(1)")
+      OUTPUT_ = bool // _CK_" = .true."
+      call assert_delayed( OUTPUT_ == _CK_"true = .true.", &
+        __LINE__ , "logical(1) concat character(4)")
     end block
     block
       logical(2) :: bool
       bool = .true.
-    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
-      __LINE__ , "character(4) concat logical(2)")
-    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
-      __LINE__ , "logical(2) concat character(4)")
+      OUTPUT_ = _CK_".true. = " // bool
+      call assert_delayed( OUTPUT_ == _CK_".true. = true", &
+        __LINE__ , "character(4) concat logical(2)")
+      OUTPUT_ = bool // _CK_" = .true."
+      call assert_delayed( OUTPUT_ == _CK_"true = .true.", &
+        __LINE__ , "logical(2) concat character(4)")
     end block
     block
       logical(4) :: bool
       bool = .true.
-    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
-      __LINE__ , "character(4) concat logical(4)")
-    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
-      __LINE__ , "logical(4) concat character(4)")
+      OUTPUT_ = _CK_".true. = " // bool
+      call assert_delayed( OUTPUT_ == _CK_".true. = true", &
+        __LINE__ , "character(4) concat logical(4)")
+      OUTPUT_ = bool // _CK_" = .true."
+      call assert_delayed( OUTPUT_ == _CK_"true = .true.", &
+        __LINE__ , "logical(4) concat character(4)")
     end block
     block
       logical(8) :: bool
       bool = .true.
-    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
-      __LINE__ , "character(4) concat logical(8)")
-    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
-      __LINE__ , "logical(8) concat character(4)")
+      OUTPUT_ = _CK_".true. = " // bool
+      call assert_delayed( OUTPUT_ == _CK_".true. = true", &
+        __LINE__ , "character(4) concat logical(8)")
+      OUTPUT_ = bool // _CK_" = .true."
+      call assert_delayed( OUTPUT_ == _CK_"true = .true.", &
+        __LINE__ , "logical(8) concat character(4)")
     end block
     block
       logical(16) :: bool
       bool = .true.
-    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
-      __LINE__ , "character(4) concat logical(16)")
-    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
-      __LINE__ , "logical(16) concat character(4)")
+      OUTPUT_ = _CK_".true. = " // bool
+      call assert_delayed( OUTPUT_ == _CK_".true. = true", &
+        __LINE__ , "character(4) concat logical(16)")
+      OUTPUT_ = bool // _CK_" = .true."
+      call assert_delayed( OUTPUT_ == _CK_"true = .true.", &
+        __LINE__ , "logical(16) concat character(4)")
     end block
 
     associate( msg => "character(4) conversion to integer failed")

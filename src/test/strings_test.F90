@@ -125,10 +125,12 @@ call use_color(.true.)
     block
       {{ot.decl}} :: bool
       bool = .true.
-    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = true", &
-      __LINE__ , "{{t.decl}} concat {{ot.decl}}")
-    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
-      __LINE__ , "{{ot.decl}} concat {{t.decl}}")
+      OUTPUT_ = _CK_".true. = " // bool
+      call assert_delayed( OUTPUT_ == _CK_".true. = true", &
+        __LINE__ , "{{t.decl}} concat {{ot.decl}}")
+      OUTPUT_ = bool // _CK_" = .true."
+      call assert_delayed( OUTPUT_ == _CK_"true = .true.", &
+        __LINE__ , "{{ot.decl}} concat {{t.decl}}")
     end block
     {%- endfor %}
 
