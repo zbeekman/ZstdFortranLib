@@ -112,10 +112,10 @@ If a failure occurs the output will look like:
 
 ## Documentation
 
-High level user documentation is published (from the [`doc`](./doc) directory) to
+High level user documentation is published (from the [`docs`](./docs) directory) to
 [Read the Docs](https://zstdfortranlib/readthedocs.io) <https://zstdfortranlib/readthedocs.io>.
 
-User/client API documentation (protected & public scop) as well as project developer documentation
+User/client API documentation (protected & public scope) as well as project developer documentation
 (private scope & public/protected)will be generate via [FORD] and published
 via GitHub pages to https://izaakbeekman.com/ZstdFortranLib (:warning: not yet operational :warning:)
 
@@ -126,7 +126,7 @@ improving the functionality of operators on intrinsic types. Templating function
 provided via the [Jin2For] tool, which adds functionality to the [Jinja2] templating engine
 specific to writing Fortran programs.
 
-__ :warning:NEVER MANUALLY EDIT SOURCES IN THE [`generated`] DIRECTORY! :warning: __
+__:warning:NEVER MANUALLY EDIT SOURCES IN THE [`generated`] DIRECTORY! :warning:__
 
 
 ---
