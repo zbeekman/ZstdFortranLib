@@ -145,6 +145,7 @@ jobs:
           bash <(curl -s https://codecov.io/bash) \
             -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
             -c -F unittest_${flag} \
+            -X fix \
             -n "GHA-GCC${GCC_V}-${{ runner.os }}"
         done
 
@@ -155,5 +156,6 @@ jobs:
         #   bash <(curl -s https://codecov.io/bash) \
         #     -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
         #     -c -F integrationtest_${flag} \
+        #     -X fix \
         #     -n "GHA-GCC${GCC_V}-${{ runner.os }}"
         # done
