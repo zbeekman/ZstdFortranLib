@@ -15,9 +15,9 @@ program testing_test
     __FILE__
   {%- for t in real_types %}
   integer, parameter :: {{t.alias}} = {{t.kind}}
-  real(kind={{t.alias}}) :: tolerance_{{t.alias}} = 10000 * epsilon(1.0_{{t.alias}})
-  real(kind={{t.alias}}) :: rtolerance_{{t.alias}} = (10000/100) * epsilon(1.0_{{t.alias}})
-  real(kind={{t.alias}}) :: one_hundred_{{t.alias}} = 100.0_{{t.alias}}
+  real(kind={{t.alias}}), parameter :: tolerance_{{t.alias}} = 10.0_{{t.alias}}
+  real(kind={{t.alias}}), parameter :: rtolerance_{{t.alias}} = tolerance_{{t.alias}}/100
+  real(kind={{t.alias}}), parameter :: one_hundred_{{t.alias}} = 100.0_{{t.alias}}
   {%- endfor %}
 
   type(unit_test_t) :: test
@@ -33,18 +33,20 @@ program testing_test
   !> Test all real kinds
   {%- for t in real_types %}
   !> Test {{t.decl}} interfaces
+  {%- for ot in real_types %}
   associate( &
     one_hundred => one_hundred_{{t.alias}}, &
     tolerance   => tolerance_{{t.alias}}, &
     rtolerance  => rtolerance_{{t.alias}})
 
-    test = ( (100 - 10*epsilon(1.0_{{t.alias}})) .is. one_hundred ) .within. tolerance
+    test = ( (100 - 10*epsilon(1.0_{{t.alias}})) .is. one_hundred ) .within. tolerance_{{ot.alias}}
     test = ( (100 - 10*epsilon(1.0_{{t.alias}})) .is. one_hundred ) .within. .absolute. tolerance
     test = ( (100 - 10*epsilon(1.0_{{t.alias}})) .is. one_hundred ) .within. .relative. rtolerance
     test = .not. ((10.0_{{t.alias}} .is. one_hundred) .within. tolerance)
     test = .not. ((10.0_{{t.alias}} .is. one_hundred) .within. .absolute. tolerance)
     test = .not. ((10.0_{{t.alias}} .is. one_hundred) .within. .relative. rtolerance)
   end associate
+  {%- endfor %}
   {%- endfor %}
 
   call test%report_status()

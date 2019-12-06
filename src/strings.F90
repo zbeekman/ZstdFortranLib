@@ -359,12 +359,6 @@ contains
       end if
     end do
 
-    if (count == 0 ) then ! Nothing to do
-      allocate(character(kind={{t.kind}},len=len(string)) :: res(1))
-      res(1) = string
-      return
-    end if
-
     allocate(character(kind={{t.kind}},len=max_size) :: res(count))
     next = 1
     do i = 1,count-1

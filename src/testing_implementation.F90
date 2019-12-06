@@ -29,7 +29,7 @@ contains
 
   {%- for ot in real_types %}
   module procedure {{t.alias}}_within_{{ot.alias}}
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind={{ot.kind}}) - real(this%rhs,kind={{ot.kind}})) <= tol
   end procedure
   {%- endfor %}
 

@@ -25,16 +25,16 @@ contains
     end select
   end procedure
   module procedure r4_within_r4
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=4) - real(this%rhs,kind=4)) <= tol
   end procedure
   module procedure r4_within_r8
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=8) - real(this%rhs,kind=8)) <= tol
   end procedure
   module procedure r4_within_r10
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=10) - real(this%rhs,kind=10)) <= tol
   end procedure
   module procedure r4_within_r16
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=16) - real(this%rhs,kind=16)) <= tol
   end procedure
 
   ! module procedure bare_within_tol_r4
@@ -80,16 +80,16 @@ contains
     end select
   end procedure
   module procedure r8_within_r4
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=4) - real(this%rhs,kind=4)) <= tol
   end procedure
   module procedure r8_within_r8
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=8) - real(this%rhs,kind=8)) <= tol
   end procedure
   module procedure r8_within_r10
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=10) - real(this%rhs,kind=10)) <= tol
   end procedure
   module procedure r8_within_r16
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=16) - real(this%rhs,kind=16)) <= tol
   end procedure
 
   ! module procedure bare_within_tol_r8
@@ -135,16 +135,16 @@ contains
     end select
   end procedure
   module procedure r10_within_r4
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=4) - real(this%rhs,kind=4)) <= tol
   end procedure
   module procedure r10_within_r8
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=8) - real(this%rhs,kind=8)) <= tol
   end procedure
   module procedure r10_within_r10
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=10) - real(this%rhs,kind=10)) <= tol
   end procedure
   module procedure r10_within_r16
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=16) - real(this%rhs,kind=16)) <= tol
   end procedure
 
   ! module procedure bare_within_tol_r10
@@ -190,16 +190,16 @@ contains
     end select
   end procedure
   module procedure r16_within_r4
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=4) - real(this%rhs,kind=4)) <= tol
   end procedure
   module procedure r16_within_r8
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=8) - real(this%rhs,kind=8)) <= tol
   end procedure
   module procedure r16_within_r10
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=10) - real(this%rhs,kind=10)) <= tol
   end procedure
   module procedure r16_within_r16
-    res = abs(this%lhs - this%rhs) <= tol
+    res = abs(real(this%lhs,kind=16) - real(this%rhs,kind=16)) <= tol
   end procedure
 
   ! module procedure bare_within_tol_r16

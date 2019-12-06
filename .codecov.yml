@@ -1,5 +1,5 @@
 ignore:
-  - "testing.F90"
+  - "generated/GNU/testing.F90"
 
 codecov:
   require_ci_to_pass: yes
@@ -33,6 +33,12 @@ coverage:
           - "**/test/*"
           - "**/*_test.*"
     patch:
+      default: off
+      unittest_core: *unit_core
+      unittest_extern: *unit_extern
+      unittest_tests: *unit_tests
+
+    changes:
       default: off
       unittest_core: *unit_core
       unittest_extern: *unit_extern

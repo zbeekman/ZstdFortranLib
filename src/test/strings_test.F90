@@ -43,12 +43,27 @@ call use_color(.true.)
 #define _CK_ {{t.kind}}_
 #define OUTPUT_ output_{{t.alias}}
 
-  write(stdout,"(A)") yellow("Testing " //underline("{{t.alias}}"))
-  write(stdout,"(A)") bold("This text is "//green("green"))
-  write(stdout,"(A)") red("This text is "//strikethrough("not")//" red")
-  write(stdout,"(A)") inverse("Inverse text.")
+  write(stdout,"(A)") yellow(_CK_"Testing " //underline(_CK_"{{t.alias}}"))
+  write(stdout,"(A)") bold(_CK_"This text is "//green(_CK_"green"))
+  write(stdout,"(A)") red(_CK_"This text is "//strikethrough(_CK_"not")//_CK_" red")
+  write(stdout,"(A)") inverse(_CK_"Inverse text.")
 
   associate(paths => paths_{{t.alias}}, qbf => qbf_{{t.alias}})
+    call use_color(.false.)
+    OUTPUT_ = underline( yellow(qbf))
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "underline( yellow( {{t.decl}} )) (color = OFF) failed")
+    OUTPUT_ = bold( green(qbf))
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "bold( green( {{t.decl}} )) (color = OFF) failed")
+    OUTPUT_ = red( strikethrough(qbf))
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "red( strikethrough( {{t.decl}} )) (color = OFF) failed")
+    OUTPUT_ = inverse(qbf)
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "inverse( {{t.decl}} ) (color = OFF) failed")
+    call use_color(.true.)
+
     OUTPUT_ = gsub(qbf, _CK_"the", _CK_"a")
     call assert_delayed ( &
       OUTPUT_ ==  _CK_"a quick brown fox jumped over a lazy dog", __LINE__ , &
@@ -62,6 +77,11 @@ call use_color(.true.)
       OUTPUT_ == _CK_"the quick brown fox jumped over the lazy god", __LINE__ , &
       "{{t.decl}} gsub 'dog --> god' failed")
 
+    OUTPUT_ = sub(qbf, _CK_"dog", _CK_"god")
+    call assert_delayed ( &
+      OUTPUT_ == _CK_"the quick brown fox jumped over the lazy god", __LINE__ , &
+      "{{t.decl}} sub 'dog --> god' failed")
+
     OUTPUT_ = sub(qbf, _CK_"the", _CK_"a")
     call assert_delayed ( &
       OUTPUT_ == _CK_"a quick brown fox jumped over the lazy dog", __LINE__ , &
@@ -71,6 +91,11 @@ call use_color(.true.)
     call assert_delayed ( &
       OUTPUT_ == _CK_"the quick brown fox jumped over a lazy dog", __LINE__ , &
       "{{t.decl}} sub (right) 'the --> a' failed")
+
+    OUTPUT_ = sub(qbf, _CK_"chicken", _CK_"rooster")
+    call assert_delayed ( &
+      OUTPUT_ == qbf, __LINE__ , &
+      "{{t.decl}} sub no-op failed")
 
     allocate( PAGE_ , source = split(paths, _CK_":"))
     associate(msg => "{{t.decl}} path splitting test failed")
@@ -106,6 +131,9 @@ call use_color(.true.)
 
     call assert_delayed ( join( _CK_"A line" // nl, _CK_" ending") == _CK_"A line ending", __LINE__ , &
       "{{t.decl}} join scalar")
+
+    call assert_delayed( "ascii," // _CK_" maybe ascii" == _CK_"ascii, maybe ascii", &
+      __LINE__ , "character(1) concat {{t.decl}}")
 
     {%- for ot in real_types %}
     call assert_delayed( _CK_"one = " // 1.0_{{ot.kind}} == _CK_"one = 1.00000", &

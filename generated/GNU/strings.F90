@@ -876,12 +876,6 @@ contains
       end if
     end do
 
-    if (count == 0 ) then ! Nothing to do
-      allocate(character(kind=1,len=len(string)) :: res(1))
-      res(1) = string
-      return
-    end if
-
     allocate(character(kind=1,len=max_size) :: res(count))
     next = 1
     do i = 1,count-1
@@ -1545,12 +1539,6 @@ contains
         exit
       end if
     end do
-
-    if (count == 0 ) then ! Nothing to do
-      allocate(character(kind=4,len=len(string)) :: res(1))
-      res(1) = string
-      return
-    end if
 
     allocate(character(kind=4,len=max_size) :: res(count))
     next = 1

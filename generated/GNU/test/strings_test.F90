@@ -57,12 +57,27 @@ call use_color(.true.)
 #define _CK_ 1_
 #define OUTPUT_ output_c1
 
-  write(stdout,"(A)") yellow("Testing " //underline("c1"))
-  write(stdout,"(A)") bold("This text is "//green("green"))
-  write(stdout,"(A)") red("This text is "//strikethrough("not")//" red")
-  write(stdout,"(A)") inverse("Inverse text.")
+  write(stdout,"(A)") yellow(_CK_"Testing " //underline(_CK_"c1"))
+  write(stdout,"(A)") bold(_CK_"This text is "//green(_CK_"green"))
+  write(stdout,"(A)") red(_CK_"This text is "//strikethrough(_CK_"not")//_CK_" red")
+  write(stdout,"(A)") inverse(_CK_"Inverse text.")
 
   associate(paths => paths_c1, qbf => qbf_c1)
+    call use_color(.false.)
+    OUTPUT_ = underline( yellow(qbf))
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "underline( yellow( character(1) )) (color = OFF) failed")
+    OUTPUT_ = bold( green(qbf))
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "bold( green( character(1) )) (color = OFF) failed")
+    OUTPUT_ = red( strikethrough(qbf))
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "red( strikethrough( character(1) )) (color = OFF) failed")
+    OUTPUT_ = inverse(qbf)
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "inverse( character(1) ) (color = OFF) failed")
+    call use_color(.true.)
+
     OUTPUT_ = gsub(qbf, _CK_"the", _CK_"a")
     call assert_delayed ( &
       OUTPUT_ ==  _CK_"a quick brown fox jumped over a lazy dog", __LINE__ , &
@@ -76,6 +91,11 @@ call use_color(.true.)
       OUTPUT_ == _CK_"the quick brown fox jumped over the lazy god", __LINE__ , &
       "character(1) gsub 'dog --> god' failed")
 
+    OUTPUT_ = sub(qbf, _CK_"dog", _CK_"god")
+    call assert_delayed ( &
+      OUTPUT_ == _CK_"the quick brown fox jumped over the lazy god", __LINE__ , &
+      "character(1) sub 'dog --> god' failed")
+
     OUTPUT_ = sub(qbf, _CK_"the", _CK_"a")
     call assert_delayed ( &
       OUTPUT_ == _CK_"a quick brown fox jumped over the lazy dog", __LINE__ , &
@@ -85,6 +105,11 @@ call use_color(.true.)
     call assert_delayed ( &
       OUTPUT_ == _CK_"the quick brown fox jumped over a lazy dog", __LINE__ , &
       "character(1) sub (right) 'the --> a' failed")
+
+    OUTPUT_ = sub(qbf, _CK_"chicken", _CK_"rooster")
+    call assert_delayed ( &
+      OUTPUT_ == qbf, __LINE__ , &
+      "character(1) sub no-op failed")
 
     allocate( PAGE_ , source = split(paths, _CK_":"))
     associate(msg => "character(1) path splitting test failed")
@@ -121,6 +146,9 @@ call use_color(.true.)
 
     call assert_delayed ( join( _CK_"A line" // nl, _CK_" ending") == _CK_"A line ending", __LINE__ , &
       "character(1) join scalar")
+
+    call assert_delayed( "ascii," // _CK_" maybe ascii" == _CK_"ascii, maybe ascii", &
+      __LINE__ , "character(1) concat character(1)")
     call assert_delayed( _CK_"one = " // 1.0_4 == _CK_"one = 1.00000", &
       __LINE__ , "character(1) concat real(4)")
     call assert_delayed( 1.0_4 // _CK_" = one" == _CK_"1.00000 = one", &
@@ -240,12 +268,27 @@ call use_color(.true.)
 #define _CK_ 4_
 #define OUTPUT_ output_c4
 
-  write(stdout,"(A)") yellow("Testing " //underline("c4"))
-  write(stdout,"(A)") bold("This text is "//green("green"))
-  write(stdout,"(A)") red("This text is "//strikethrough("not")//" red")
-  write(stdout,"(A)") inverse("Inverse text.")
+  write(stdout,"(A)") yellow(_CK_"Testing " //underline(_CK_"c4"))
+  write(stdout,"(A)") bold(_CK_"This text is "//green(_CK_"green"))
+  write(stdout,"(A)") red(_CK_"This text is "//strikethrough(_CK_"not")//_CK_" red")
+  write(stdout,"(A)") inverse(_CK_"Inverse text.")
 
   associate(paths => paths_c4, qbf => qbf_c4)
+    call use_color(.false.)
+    OUTPUT_ = underline( yellow(qbf))
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "underline( yellow( character(4) )) (color = OFF) failed")
+    OUTPUT_ = bold( green(qbf))
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "bold( green( character(4) )) (color = OFF) failed")
+    OUTPUT_ = red( strikethrough(qbf))
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "red( strikethrough( character(4) )) (color = OFF) failed")
+    OUTPUT_ = inverse(qbf)
+    call assert_delayed ( OUTPUT_ == qbf , __LINE__ , &
+      "inverse( character(4) ) (color = OFF) failed")
+    call use_color(.true.)
+
     OUTPUT_ = gsub(qbf, _CK_"the", _CK_"a")
     call assert_delayed ( &
       OUTPUT_ ==  _CK_"a quick brown fox jumped over a lazy dog", __LINE__ , &
@@ -259,6 +302,11 @@ call use_color(.true.)
       OUTPUT_ == _CK_"the quick brown fox jumped over the lazy god", __LINE__ , &
       "character(4) gsub 'dog --> god' failed")
 
+    OUTPUT_ = sub(qbf, _CK_"dog", _CK_"god")
+    call assert_delayed ( &
+      OUTPUT_ == _CK_"the quick brown fox jumped over the lazy god", __LINE__ , &
+      "character(4) sub 'dog --> god' failed")
+
     OUTPUT_ = sub(qbf, _CK_"the", _CK_"a")
     call assert_delayed ( &
       OUTPUT_ == _CK_"a quick brown fox jumped over the lazy dog", __LINE__ , &
@@ -268,6 +316,11 @@ call use_color(.true.)
     call assert_delayed ( &
       OUTPUT_ == _CK_"the quick brown fox jumped over a lazy dog", __LINE__ , &
       "character(4) sub (right) 'the --> a' failed")
+
+    OUTPUT_ = sub(qbf, _CK_"chicken", _CK_"rooster")
+    call assert_delayed ( &
+      OUTPUT_ == qbf, __LINE__ , &
+      "character(4) sub no-op failed")
 
     allocate( PAGE_ , source = split(paths, _CK_":"))
     associate(msg => "character(4) path splitting test failed")
@@ -304,6 +357,9 @@ call use_color(.true.)
 
     call assert_delayed ( join( _CK_"A line" // nl, _CK_" ending") == _CK_"A line ending", __LINE__ , &
       "character(4) join scalar")
+
+    call assert_delayed( "ascii," // _CK_" maybe ascii" == _CK_"ascii, maybe ascii", &
+      __LINE__ , "character(1) concat character(4)")
     call assert_delayed( _CK_"one = " // 1.0_4 == _CK_"one = 1.00000", &
       __LINE__ , "character(4) concat real(4)")
     call assert_delayed( 1.0_4 // _CK_" = one" == _CK_"1.00000 = one", &
