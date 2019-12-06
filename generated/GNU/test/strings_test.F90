@@ -1,7 +1,8 @@
 program test_string_mod
   use zsfl_strings, only : &
     gsub, ascii_k, utf8_k, sub, split, join, to_s, to_i, to_l, to_r, init_float_fmt, nl, &
-    colorize => maybe_colorize, use_color, operator(//)
+    colorize => maybe_colorize, use_color, underline, bold, inverse, strikethrough, &
+    green, red, yellow, operator(//)
   use, intrinsic :: iso_fortran_env, only: stderr => error_unit, stdout => output_unit
   implicit none
 
@@ -41,6 +42,9 @@ program test_string_mod
   end interface
 
 
+call init_float_fmt(6)
+call use_color(.true.)
+
 !  call use_color(.false.)
   write(stdout,"(A)") ""
   write(stdout,"(A,I0)") "Default kind = ", selected_char_kind("default")
@@ -52,6 +56,11 @@ program test_string_mod
 #define PAGE_ page_c1
 #define _CK_ 1_
 #define OUTPUT_ output_c1
+
+  write(stdout,"(A)") yellow("Testing " //underline("c1"))
+  write(stdout,"(A)") bold("This text is "//green("green"))
+  write(stdout,"(A)") red("This text is "//strikethrough("not")//" red")
+  write(stdout,"(A)") inverse("Inverse text.")
 
   associate(paths => paths_c1, qbf => qbf_c1)
     OUTPUT_ = gsub(qbf, _CK_"the", _CK_"a")
@@ -110,6 +119,85 @@ program test_string_mod
     call assert_delayed ( join( PAGE_ , _CK_"")   == _CK_"foobarbaz",     __LINE__ , &
       "character(1) rejoin w/ zero length string 'foo bar baz' failed")
 
+    call assert_delayed ( join( _CK_"A line" // nl, _CK_" ending") == _CK_"A line ending", __LINE__ , &
+      "character(1) join scalar")
+    call assert_delayed( _CK_"one = " // 1.0_4 == _CK_"one = 1.00000", &
+      __LINE__ , "character(1) concat real(4)")
+    call assert_delayed( 1.0_4 // _CK_" = one" == _CK_"1.00000 = one", &
+      __LINE__ , "real(4) concat character(1)")
+    call assert_delayed( _CK_"one = " // 1.0_8 == _CK_"one = 1.00000", &
+      __LINE__ , "character(1) concat real(8)")
+    call assert_delayed( 1.0_8 // _CK_" = one" == _CK_"1.00000 = one", &
+      __LINE__ , "real(8) concat character(1)")
+    call assert_delayed( _CK_"one = " // 1.0_10 == _CK_"one = 1.00000", &
+      __LINE__ , "character(1) concat real(10)")
+    call assert_delayed( 1.0_10 // _CK_" = one" == _CK_"1.00000 = one", &
+      __LINE__ , "real(10) concat character(1)")
+    call assert_delayed( _CK_"one = " // 1.0_16 == _CK_"one = 1.00000", &
+      __LINE__ , "character(1) concat real(16)")
+    call assert_delayed( 1.0_16 // _CK_" = one" == _CK_"1.00000 = one", &
+      __LINE__ , "real(16) concat character(1)")
+    call assert_delayed( _CK_"one = " // 1_1 == _CK_"one = 1", &
+      __LINE__ , "character(1) concat integer(1)")
+    call assert_delayed( 1_1 // _CK_" = one" == _CK_"1 = one", &
+      __LINE__ , "integer(1) concat character(1)")
+    call assert_delayed( _CK_"one = " // 1_2 == _CK_"one = 1", &
+      __LINE__ , "character(1) concat integer(2)")
+    call assert_delayed( 1_2 // _CK_" = one" == _CK_"1 = one", &
+      __LINE__ , "integer(2) concat character(1)")
+    call assert_delayed( _CK_"one = " // 1_4 == _CK_"one = 1", &
+      __LINE__ , "character(1) concat integer(4)")
+    call assert_delayed( 1_4 // _CK_" = one" == _CK_"1 = one", &
+      __LINE__ , "integer(4) concat character(1)")
+    call assert_delayed( _CK_"one = " // 1_8 == _CK_"one = 1", &
+      __LINE__ , "character(1) concat integer(8)")
+    call assert_delayed( 1_8 // _CK_" = one" == _CK_"1 = one", &
+      __LINE__ , "integer(8) concat character(1)")
+    call assert_delayed( _CK_"one = " // 1_16 == _CK_"one = 1", &
+      __LINE__ , "character(1) concat integer(16)")
+    call assert_delayed( 1_16 // _CK_" = one" == _CK_"1 = one", &
+      __LINE__ , "integer(16) concat character(1)")
+    block
+      logical(1) :: bool
+      bool = .true.
+    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
+      __LINE__ , "character(1) concat logical(1)")
+    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
+      __LINE__ , "logical(1) concat character(1)")
+    end block
+    block
+      logical(2) :: bool
+      bool = .true.
+    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
+      __LINE__ , "character(1) concat logical(2)")
+    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
+      __LINE__ , "logical(2) concat character(1)")
+    end block
+    block
+      logical(4) :: bool
+      bool = .true.
+    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
+      __LINE__ , "character(1) concat logical(4)")
+    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
+      __LINE__ , "logical(4) concat character(1)")
+    end block
+    block
+      logical(8) :: bool
+      bool = .true.
+    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
+      __LINE__ , "character(1) concat logical(8)")
+    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
+      __LINE__ , "logical(8) concat character(1)")
+    end block
+    block
+      logical(16) :: bool
+      bool = .true.
+    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
+      __LINE__ , "character(1) concat logical(16)")
+    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
+      __LINE__ , "logical(16) concat character(1)")
+    end block
+
     associate( msg => "character(1) conversion to integer failed")
       call assert_delayed ( to_i( _CK_"-1" )  == -1 , __LINE__ , msg)
       call assert_delayed ( to_i( _CK_"1" )  == 1 , __LINE__ , msg)
@@ -141,6 +229,11 @@ program test_string_mod
 #define PAGE_ page_c4
 #define _CK_ 4_
 #define OUTPUT_ output_c4
+
+  write(stdout,"(A)") yellow("Testing " //underline("c4"))
+  write(stdout,"(A)") bold("This text is "//green("green"))
+  write(stdout,"(A)") red("This text is "//strikethrough("not")//" red")
+  write(stdout,"(A)") inverse("Inverse text.")
 
   associate(paths => paths_c4, qbf => qbf_c4)
     OUTPUT_ = gsub(qbf, _CK_"the", _CK_"a")
@@ -198,6 +291,85 @@ program test_string_mod
       "character(4) rejoin using '; ' test of 'foo bar baz' failed")
     call assert_delayed ( join( PAGE_ , _CK_"")   == _CK_"foobarbaz",     __LINE__ , &
       "character(4) rejoin w/ zero length string 'foo bar baz' failed")
+
+    call assert_delayed ( join( _CK_"A line" // nl, _CK_" ending") == _CK_"A line ending", __LINE__ , &
+      "character(4) join scalar")
+    call assert_delayed( _CK_"one = " // 1.0_4 == _CK_"one = 1.00000", &
+      __LINE__ , "character(4) concat real(4)")
+    call assert_delayed( 1.0_4 // _CK_" = one" == _CK_"1.00000 = one", &
+      __LINE__ , "real(4) concat character(4)")
+    call assert_delayed( _CK_"one = " // 1.0_8 == _CK_"one = 1.00000", &
+      __LINE__ , "character(4) concat real(8)")
+    call assert_delayed( 1.0_8 // _CK_" = one" == _CK_"1.00000 = one", &
+      __LINE__ , "real(8) concat character(4)")
+    call assert_delayed( _CK_"one = " // 1.0_10 == _CK_"one = 1.00000", &
+      __LINE__ , "character(4) concat real(10)")
+    call assert_delayed( 1.0_10 // _CK_" = one" == _CK_"1.00000 = one", &
+      __LINE__ , "real(10) concat character(4)")
+    call assert_delayed( _CK_"one = " // 1.0_16 == _CK_"one = 1.00000", &
+      __LINE__ , "character(4) concat real(16)")
+    call assert_delayed( 1.0_16 // _CK_" = one" == _CK_"1.00000 = one", &
+      __LINE__ , "real(16) concat character(4)")
+    call assert_delayed( _CK_"one = " // 1_1 == _CK_"one = 1", &
+      __LINE__ , "character(4) concat integer(1)")
+    call assert_delayed( 1_1 // _CK_" = one" == _CK_"1 = one", &
+      __LINE__ , "integer(1) concat character(4)")
+    call assert_delayed( _CK_"one = " // 1_2 == _CK_"one = 1", &
+      __LINE__ , "character(4) concat integer(2)")
+    call assert_delayed( 1_2 // _CK_" = one" == _CK_"1 = one", &
+      __LINE__ , "integer(2) concat character(4)")
+    call assert_delayed( _CK_"one = " // 1_4 == _CK_"one = 1", &
+      __LINE__ , "character(4) concat integer(4)")
+    call assert_delayed( 1_4 // _CK_" = one" == _CK_"1 = one", &
+      __LINE__ , "integer(4) concat character(4)")
+    call assert_delayed( _CK_"one = " // 1_8 == _CK_"one = 1", &
+      __LINE__ , "character(4) concat integer(8)")
+    call assert_delayed( 1_8 // _CK_" = one" == _CK_"1 = one", &
+      __LINE__ , "integer(8) concat character(4)")
+    call assert_delayed( _CK_"one = " // 1_16 == _CK_"one = 1", &
+      __LINE__ , "character(4) concat integer(16)")
+    call assert_delayed( 1_16 // _CK_" = one" == _CK_"1 = one", &
+      __LINE__ , "integer(16) concat character(4)")
+    block
+      logical(1) :: bool
+      bool = .true.
+    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
+      __LINE__ , "character(4) concat logical(1)")
+    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
+      __LINE__ , "logical(1) concat character(4)")
+    end block
+    block
+      logical(2) :: bool
+      bool = .true.
+    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
+      __LINE__ , "character(4) concat logical(2)")
+    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
+      __LINE__ , "logical(2) concat character(4)")
+    end block
+    block
+      logical(4) :: bool
+      bool = .true.
+    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
+      __LINE__ , "character(4) concat logical(4)")
+    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
+      __LINE__ , "logical(4) concat character(4)")
+    end block
+    block
+      logical(8) :: bool
+      bool = .true.
+    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
+      __LINE__ , "character(4) concat logical(8)")
+    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
+      __LINE__ , "logical(8) concat character(4)")
+    end block
+    block
+      logical(16) :: bool
+      bool = .true.
+    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = t", &
+      __LINE__ , "character(4) concat logical(16)")
+    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
+      __LINE__ , "logical(16) concat character(4)")
+    end block
 
     associate( msg => "character(4) conversion to integer failed")
       call assert_delayed ( to_i( _CK_"-1" )  == -1 , __LINE__ , msg)
@@ -359,11 +531,11 @@ program test_string_mod
 
 
   associate(msg => "unexpected value calling `to_s()` on real(4)")
-    call assert_delayed ( to_s(0.0_4) == "0.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(1.0_4) == "1.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(-1.0_4) == "-1.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(2.0_4) == "2.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(-2.0_4) == "-2.0000000", __LINE__, msg)
+    call assert_delayed ( to_s(0.0_4) == "0.00000", __LINE__, msg)
+    call assert_delayed ( to_s(1.0_4) == "1.00000", __LINE__, msg)
+    call assert_delayed ( to_s(-1.0_4) == "-1.00000", __LINE__, msg)
+    call assert_delayed ( to_s(2.0_4) == "2.00000", __LINE__, msg)
+    call assert_delayed ( to_s(-2.0_4) == "-2.00000", __LINE__, msg)
   end associate
 
   write(stdout,"(A)") ""
@@ -373,11 +545,11 @@ program test_string_mod
   write(stdout,"(A)") ""
 
   associate(msg => "unexpected value calling `to_s()` on real(8)")
-    call assert_delayed ( to_s(0.0_8) == "0.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(1.0_8) == "1.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(-1.0_8) == "-1.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(2.0_8) == "2.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(-2.0_8) == "-2.0000000", __LINE__, msg)
+    call assert_delayed ( to_s(0.0_8) == "0.00000", __LINE__, msg)
+    call assert_delayed ( to_s(1.0_8) == "1.00000", __LINE__, msg)
+    call assert_delayed ( to_s(-1.0_8) == "-1.00000", __LINE__, msg)
+    call assert_delayed ( to_s(2.0_8) == "2.00000", __LINE__, msg)
+    call assert_delayed ( to_s(-2.0_8) == "-2.00000", __LINE__, msg)
   end associate
 
   write(stdout,"(A)") ""
@@ -387,11 +559,11 @@ program test_string_mod
   write(stdout,"(A)") ""
 
   associate(msg => "unexpected value calling `to_s()` on real(10)")
-    call assert_delayed ( to_s(0.0_10) == "0.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(1.0_10) == "1.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(-1.0_10) == "-1.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(2.0_10) == "2.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(-2.0_10) == "-2.0000000", __LINE__, msg)
+    call assert_delayed ( to_s(0.0_10) == "0.00000", __LINE__, msg)
+    call assert_delayed ( to_s(1.0_10) == "1.00000", __LINE__, msg)
+    call assert_delayed ( to_s(-1.0_10) == "-1.00000", __LINE__, msg)
+    call assert_delayed ( to_s(2.0_10) == "2.00000", __LINE__, msg)
+    call assert_delayed ( to_s(-2.0_10) == "-2.00000", __LINE__, msg)
   end associate
 
   write(stdout,"(A)") ""
@@ -401,11 +573,11 @@ program test_string_mod
   write(stdout,"(A)") ""
 
   associate(msg => "unexpected value calling `to_s()` on real(16)")
-    call assert_delayed ( to_s(0.0_16) == "0.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(1.0_16) == "1.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(-1.0_16) == "-1.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(2.0_16) == "2.0000000", __LINE__, msg)
-    call assert_delayed ( to_s(-2.0_16) == "-2.0000000", __LINE__, msg)
+    call assert_delayed ( to_s(0.0_16) == "0.00000", __LINE__, msg)
+    call assert_delayed ( to_s(1.0_16) == "1.00000", __LINE__, msg)
+    call assert_delayed ( to_s(-1.0_16) == "-1.00000", __LINE__, msg)
+    call assert_delayed ( to_s(2.0_16) == "2.00000", __LINE__, msg)
+    call assert_delayed ( to_s(-2.0_16) == "-2.00000", __LINE__, msg)
   end associate
 
   write(stdout,"(A)") ""

@@ -38,12 +38,14 @@ program testing_test
     tolerance   => tolerance_{{t.alias}}, &
     rtolerance  => rtolerance_{{t.alias}})
 
-    test = ( (100 - 10*epsilon(1.0_{{t.alias}})) .is. one_hundred ) .within. tolerance
-    test = ( (100 - 10*epsilon(1.0_{{t.alias}})) .is. one_hundred ) .within. .absolute. tolerance
-    test = ( (100 - 10*epsilon(1.0_{{t.alias}})) .is. one_hundred ) .within. .relative. rtolerance
-    test = .not. ((10.0_{{t.alias}} .is. one_hundred) .within. tolerance)
-    test = .not. ((10.0_{{t.alias}} .is. one_hundred) .within. .absolute. tolerance)
-    test = .not. ((10.0_{{t.alias}} .is. one_hundred) .within. .relative. rtolerance)
+    {%- for ot in real_types %}
+    test = ( (100 - 10*epsilon(1.0_{{t.alias}})) .is. one_hundred ) .within. real(tolerance, kind={{ot.kind}})
+    test = ( (100 - 10*epsilon(1.0_{{t.alias}})) .is. one_hundred ) .within. .absolute. real(tolerance, kind={{ot.kind}})
+    test = ( (100 - 10*epsilon(1.0_{{t.alias}})) .is. one_hundred ) .within. .relative. real(rtolerance, kind={{ot.kind}})
+    test = .not. ((10.0_{{t.alias}} .is. one_hundred) .within. real(tolerance, kind={{ot.kind}}))
+    test = .not. ((10.0_{{t.alias}} .is. one_hundred) .within. .absolute. real(tolerance, kind={{ot.kind}}))
+    test = .not. ((10.0_{{t.alias}} .is. one_hundred) .within. .relative. real(rtolerance, kind={{ot.kind}}))
+    {%- endfor %}
   end associate
   {%- endfor %}
 

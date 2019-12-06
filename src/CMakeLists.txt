@@ -23,5 +23,20 @@ set_source_files_properties(${GENERATED_SRC} PROPERTIES COMPILE_OPTIONS -Wno-com
 
 add_targets_tests(zstdfortran)
 
+if(DEFINED ENV{LINES})
+  set_property(
+    TEST env_interface_test
+    APPEND
+    PROPERTY ENVIRONMENT LINES=$ENV{LINES}
+    )
+endif()
+if(DEFINED ENV{COLUMNS})
+  set_property(
+    TEST env_interface_test
+    APPEND
+    PROPERTY ENVIRONMENT COLUMNS=$ENV{COLUMNS}
+    )
+endif()
+
 # Allow dedicated CMake Lists.txt for some finer control, if present
 conditionally_add_test_dir()

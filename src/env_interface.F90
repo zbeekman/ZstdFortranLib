@@ -50,6 +50,8 @@ contains
         "LINES", max(this%tty_lines, this%env_lines)
     else
       write(this%stdout, '(2x,A)') """IS_A_TTY"": false,"
+      if(.envExists. "LINES") write(this%stdout, '(2x,A)') """LINES"": " // this%env("LINES") // ","
+      if(.envExists. "COLUMNS") write(this%stdout, '(2x,A)') """COLUMNS"": " // this%env("COLUMNS") // ","
     endif
 
     write(this%stdout, '(*(2x,"""",(A),""": ","""",(A),"""",:,",",/))') &
@@ -85,14 +87,12 @@ contains
     ! Environment variables that need to be converted to integers
     if(.envExists. "LINES") then
       lines_str = this%env("LINES")
-      print*, lines_str
       read(lines_str,*) this%ENV_LINES
     else
       this%ENV_LINES = 0
     end if
     if(.envExists. "COLUMNS") then
       columns_str = this%env("COLUMNS")
-      print*, columns_str
       read(columns_str,*) this%ENV_COLUMNS
     else
       this%ENV_COLUMNS = 0

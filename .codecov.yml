@@ -1,5 +1,5 @@
 ignore:
-  - "generated/*/testing.F90"
+  - "testing.F90"
 
 codecov:
   require_ci_to_pass: yes
@@ -58,3 +58,4 @@ comment:
   layout: "reach, diff, flags, files, tree"
   behavior: default
   branches: [master, develop]
+  after_n_builds: 6

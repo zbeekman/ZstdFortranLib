@@ -1,7 +1,8 @@
 program test_string_mod
   use zsfl_strings, only : &
     gsub, ascii_k, utf8_k, sub, split, join, to_s, to_i, to_l, to_r, init_float_fmt, nl, &
-    colorize => maybe_colorize, use_color, operator(//)
+    colorize => maybe_colorize, use_color, underline, bold, inverse, strikethrough, &
+    green, red, yellow, operator(//)
   use, intrinsic :: iso_fortran_env, only: stderr => error_unit, stdout => output_unit
   implicit none
 
@@ -27,6 +28,9 @@ program test_string_mod
   end interface
 {% endfor %}
 
+call init_float_fmt(6)
+call use_color(.true.)
+
 !  call use_color(.false.)
   write(stdout,"(A)") ""
   write(stdout,"(A,I0)") "Default kind = ", selected_char_kind("default")
@@ -38,6 +42,11 @@ program test_string_mod
 #define PAGE_ page_{{t.alias}}
 #define _CK_ {{t.kind}}_
 #define OUTPUT_ output_{{t.alias}}
+
+  write(stdout,"(A)") yellow("Testing " //underline("{{t.alias}}"))
+  write(stdout,"(A)") bold("This text is "//green("green"))
+  write(stdout,"(A)") red("This text is "//strikethrough("not")//" red")
+  write(stdout,"(A)") inverse("Inverse text.")
 
   associate(paths => paths_{{t.alias}}, qbf => qbf_{{t.alias}})
     OUTPUT_ = gsub(qbf, _CK_"the", _CK_"a")
@@ -95,6 +104,34 @@ program test_string_mod
     call assert_delayed ( join( PAGE_ , _CK_"")   == _CK_"foobarbaz",     __LINE__ , &
       "{{t.decl}} rejoin w/ zero length string 'foo bar baz' failed")
 
+    call assert_delayed ( join( _CK_"A line" // nl, _CK_" ending") == _CK_"A line ending", __LINE__ , &
+      "{{t.decl}} join scalar")
+
+    {%- for ot in real_types %}
+    call assert_delayed( _CK_"one = " // 1.0_{{ot.kind}} == _CK_"one = 1.00000", &
+      __LINE__ , "{{t.decl}} concat {{ot.decl}}")
+    call assert_delayed( 1.0_{{ot.kind}} // _CK_" = one" == _CK_"1.00000 = one", &
+      __LINE__ , "{{ot.decl}} concat {{t.decl}}")
+    {%- endfor %}
+
+    {%- for ot in integer_types %}
+    call assert_delayed( _CK_"one = " // 1_{{ot.kind}} == _CK_"one = 1", &
+      __LINE__ , "{{t.decl}} concat {{ot.decl}}")
+    call assert_delayed( 1_{{ot.kind}} // _CK_" = one" == _CK_"1 = one", &
+      __LINE__ , "{{ot.decl}} concat {{t.decl}}")
+    {%- endfor %}
+
+    {%- for ot in logical_types %}
+    block
+      {{ot.decl}} :: bool
+      bool = .true.
+    call assert_delayed( _CK_".true. = " // bool == _CK_".true. = true", &
+      __LINE__ , "{{t.decl}} concat {{ot.decl}}")
+    call assert_delayed( bool // _CK_" = .true." == _CK_"true = .true.", &
+      __LINE__ , "{{ot.decl}} concat {{t.decl}}")
+    end block
+    {%- endfor %}
+
     associate( msg => "{{t.decl}} conversion to integer failed")
       {%- for int in [-1, 1, -99, 999] %}
       call assert_delayed ( to_i( _CK_"{{int}}" )  == {{int}} , __LINE__ , msg)
@@ -150,11 +187,11 @@ program test_string_mod
 {% for t in real_types %}
   associate(msg => "unexpected value calling `to_s()` on {{t.decl}}")
     {%- for f, s in [
-      ("0.0", "0.0000000"),
-      ("1.0", "1.0000000"),
-      ("-1.0", "-1.0000000"),
-      ("2.0", "2.0000000"),
-      ("-2.0", "-2.0000000")
+      ("0.0", "0.00000"),
+      ("1.0", "1.00000"),
+      ("-1.0", "-1.00000"),
+      ("2.0", "2.00000"),
+      ("-2.0", "-2.00000")
     ] %}
     call assert_delayed ( to_s({{f}}_{{t.kind}}) == "{{s}}", __LINE__, msg)
     {%- endfor %}
