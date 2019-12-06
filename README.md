@@ -73,7 +73,7 @@ exceptions in less performance-critical, non-pure, higher-level program units.
 - Custom error messages
 - Pretty output to terminal, dynamically formatted
 - Raise fatal or deferred exceptions
-- Check if exceptions are signalling
+- Check if exceptions are signaling
 - Handle exceptions
 - Signal handler hooks
 - Introspective CMake build system, with exported targets
@@ -116,7 +116,7 @@ High level user documentation is published (from the [`doc`](./doc) directory) t
 [Read the Docs](https://zstdfortranlib/readthedocs.io) <https://zstdfortranlib/readthedocs.io>.
 
 User/client API documentation (protected & public scop) as well as project developer documentation
-(private scope & public/protecte)will be generate via [FORD] and published
+(private scope & public/protected)will be generate via [FORD] and published
 via GitHub pages to https://izaakbeekman.com/ZstdFortranLib (:warning: not yet operational :warning:)
 
 ## Templating

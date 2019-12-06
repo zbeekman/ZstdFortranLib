@@ -14,7 +14,7 @@ If you discover a security vulnerability, please report it to:
 
 While we do not currently participate in any bug bounty programs, we promise to acknowledge
 the email within 21 days and respond within __30 days__ of the disclosure of the potential
-vulnerability with it's legitimicy.
+vulnerability with it's legitimacy.
 
 We ask that you refrain from public disclosure until *either* of the following conditions are
 met:

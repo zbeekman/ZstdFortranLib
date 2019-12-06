@@ -34,7 +34,7 @@ To contribute, please follow these steps:
    contributions are rleated to [an open issue], please include `issue-<num>` in the
    branch name, where `<num>` is the issue number.
 3. Please use descriptive commit messages. The first line should be less than or equal
-   to 50 characters in length, start with a capitalized imperitive verb and not end in
+   to 50 characters in length, start with a capitalized imperative verb and not end in
    a period. Subsequent lines should be separated by a single blank line from the high
    level description used in the first line. For example:
    ```

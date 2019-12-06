@@ -85,7 +85,7 @@ autosort = True
 hashruler_min_length = 10
 
 # By default, if cmake-format cannot successfully fit everything into the
-# desired linewidth it will apply the last, most agressive attempt that it made.
+# desired linewidth it will apply the last, most aggressive attempt that it made.
 # If this flag is True, however, cmake-format will print error, exit with non-
 # zero status code, and write-out nothing
 require_valid_layout = False
