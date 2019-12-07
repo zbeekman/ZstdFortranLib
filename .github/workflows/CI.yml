@@ -114,6 +114,7 @@ jobs:
         pipenv --help || pip install --user pipenv
         pipenv sync --dev
         curl -s https://codecov.io/bash > "${GITHUB_WORKSPACE}/codecov"
+        chmod +x "${GITHUB_WORKSPACE}/codecov"
 
     - name: configure
       run: |
@@ -142,9 +143,7 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: |
         pipenv run unit_test
-        ls -l "${GITHUB_WORKSPACE}/codecov"
-        head "${GITHUB_WORKSPACE}/codecov"
-        bash < "${GITHUB_WORKSPACE}/codecov" -v \
+        "${GITHUB_WORKSPACE}/codecov" -v \
           -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
           -c -F unittest_extern \
           -G 'extern/**/*.*' \
@@ -152,7 +151,7 @@ jobs:
           -g 'src/**/*.*' \
           -n "GHA-GCC${GCC_V}-${{ runner.os }}"
         find "${BUILD_DIR}/extern" -type f -name '*.gc*' -exec rm {} \;
-        bash < "${GITHUB_WORKSPACE}/codecov" -v \
+        "${GITHUB_WORKSPACE}/codecov" -v \
           -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
           -c -F unittest_tests \
           -G 'extern/GNU/**/*_test.*' \
@@ -160,7 +159,7 @@ jobs:
           -g 'extern/**/*.*' \
           -n "GHA-GCC${GCC_V}-${{ runner.os }}"
         find "${BUILD_DIR} -type f -name '*_test.gc*' -exec rm {} \;
-        bash < "${GITHUB_WORKSPACE}/codecov" -v \
+        "${GITHUB_WORKSPACE}/codecov" -v \
           -x gcov-${GCC_V} -p ${GITHUB_WORKSPACE} \
           -c -F unittest_core \
           -G 'generated/GNU/*.[Ff]90' \
