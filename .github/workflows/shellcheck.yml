@@ -12,6 +12,4 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.reviewdog_token }}
         with:
           github_token: ${{ secrets.reviewdog_token }}
-          reporter:
-            - github-pr-check
-            - github-pr-review
+          reporter: github-pr-review
