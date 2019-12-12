@@ -157,7 +157,7 @@ jobs:
           -G '*/test/*' \
           -g '*/extern/*' \
           -n "GHA-GCC${GCC_V}-${{ runner.os }}-unittest-tests"
-        find "${BUILD_DIR}" -type f -name '*_test.*.gc*' -print -exec rm {} \;
+        ! find "${BUILD_DIR}" -type f -name '*_test.*.gc*' -print -exec rm {} \;
         "${GITHUB_WORKSPACE}/codecov" -c -v \
           -x gcov-${GCC_V} \
           -p ${GITHUB_WORKSPACE} \
@@ -165,7 +165,7 @@ jobs:
           -g '*/test/*'
           -g '*/extern/*' \
           -n "GHA-GCC${GCC_V}-${{ runner.os }}-unittest-core"
-        find "${BUILD_DIR}" -name '*.*.gc*' -print -exec rm {} \;
+        ! find "${BUILD_DIR}" -name '*.*.gc*' -print -exec rm {} \;
 
     - name: integration test
       run: |
