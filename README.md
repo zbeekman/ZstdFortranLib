@@ -11,7 +11,8 @@
 
 </div>
 
-A convenient, error stack object designed for use in pure and elemental procedures, and with Coarray Objects.
+Implements missing functionality such as error handling, strings manipulation, system/environment interface &
+testing utilities.
 
 <details>
 <summary>Table of contents</summary>
@@ -123,7 +124,7 @@ via GitHub pages to https://izaakbeekman.com/ZstdFortranLib (:warning: not yet o
 
 This project uses templating and compile-time polymorphism (procedure overloading) for
 improving the functionality of operators on intrinsic types. Templating functionality is
-provided via the [Jin2For] tool, which adds functionality to the [Jinja2] templating engine
+provided via the [Jin2For] tool, which adds functionality to the [Jinja2] templating enginep
 specific to writing Fortran programs.
 
 __:warning:NEVER MANUALLY EDIT SOURCES IN THE [`generated`] DIRECTORY! :warning:__
