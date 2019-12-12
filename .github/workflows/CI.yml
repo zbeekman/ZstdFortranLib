@@ -143,13 +143,6 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: |
         pipenv run unit_test
-        "${GITHUB_WORKSPACE}/codecov" -c \
-          -x gcov-${GCC_V} \
-          -p ${GITHUB_WORKSPACE} \
-          -F unittest_extern \
-          -G '*/extern/*' \
-          -g '*/test/*' \
-          -n "GHA-GCC${GCC_V}-${{ runner.os }}-unittest-extern"
         find "${BUILD_DIR}" -type f -path '*/extern/*' -name '*.*.gc*' -print -exec rm {} \; || true
         "${GITHUB_WORKSPACE}/codecov" -c \
           -x gcov-${GCC_V} \

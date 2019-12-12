@@ -1,5 +1,6 @@
 ignore:
-  - "*/generated/GNU/testing.F90"
+  - "**/GNU/testing.F*"
+  - "**/extern/**"
 
 codecov:
   require_ci_to_pass: yes
@@ -20,16 +21,11 @@ coverage:
           - "!*/extern/*"
           - "!*_test.[Ff]90"
           - "!*_test.c"
+          - "!*/GNU/testing.F90"
           - "*/generated/GNU/*.[Ff]90"
           - "*/src/*.[Ff]90"
           - "*/src/*.c"
           - "*/src/c_interfaces/*.c"
-      unittest_extern:
-        flags: unittest_extern
-        target: auto
-        threshold: 5%
-        paths:
-          - "*/extern/*"
       unittest_tests:
         flags: unittest_tests
         target: auto
@@ -52,16 +48,11 @@ coverage:
           - "!*/extern/*"
           - "!*_test.[Ff]90"
           - "!*_test.c"
+          - "!*/GNU/testing.F90"
           - "*/generated/GNU/*.[Ff]90"
           - "*/src/*.[Ff]90"
           - "*/src/*.c"
           - "*/src/c_interfaces/*.c"
-      unittest_extern:
-        flags: unittest_extern
-        target: auto
-        threshold: 5%
-        paths:
-          - "*/extern/*"
       unittest_tests:
         flags: unittest_tests
         target: auto
@@ -78,7 +69,6 @@ coverage:
     # changes:
     #   default: off
     #   unittest_core: *unit_core
-    #   unittest_extern: *unit_extern
     #   unittest_tests: *unit_tests
 
 flags:
@@ -89,13 +79,11 @@ flags:
       - "!*/extern/*"
       - "!*_test.[Ff]90"
       - "!*_test.c"
+      - "!*/GNU/testing.F90"
       - "*/generated/GNU/*.[Ff]90"
       - "*/src/*.[Ff]90"
       - "*/src/*.c"
       - "*/src/c_interfaces/*.c"
-  unittest_extern:
-    paths:
-      - "*/extern/*"
   unittest_tests:
     paths:
       - "*/test/*.[Ff]90"
@@ -110,4 +98,4 @@ comment:
   layout: "reach, diff, flags, files"
   behavior: default
   branches: [master, develop]
-  after_n_builds: 9
+  after_n_builds: 12
