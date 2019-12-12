@@ -11,7 +11,8 @@
 
 </div>
 
-A convenient, error stack object designed for use in pure and elemental procedures, and with Coarray Objects.
+Implements missing functionality such as error handling, strings manipulation, system/environment interface &
+testing utilities.
 
 <details>
 <summary>Table of contents</summary>
@@ -112,10 +113,10 @@ If a failure occurs the output will look like:
 
 ## Documentation
 
-High level user documentation is published (from the [`doc`](./doc) directory) to
+High level user documentation is published (from the [`docs`](./docs) directory) to
 [Read the Docs](https://zstdfortranlib/readthedocs.io) <https://zstdfortranlib/readthedocs.io>.
 
-User/client API documentation (protected & public scop) as well as project developer documentation
+User/client API documentation (protected & public scope) as well as project developer documentation
 (private scope & public/protected)will be generate via [FORD] and published
 via GitHub pages to https://izaakbeekman.com/ZstdFortranLib (:warning: not yet operational :warning:)
 
@@ -123,10 +124,10 @@ via GitHub pages to https://izaakbeekman.com/ZstdFortranLib (:warning: not yet o
 
 This project uses templating and compile-time polymorphism (procedure overloading) for
 improving the functionality of operators on intrinsic types. Templating functionality is
-provided via the [Jin2For] tool, which adds functionality to the [Jinja2] templating engine
+provided via the [Jin2For] tool, which adds functionality to the [Jinja2] templating enginep
 specific to writing Fortran programs.
 
-__ :warning:NEVER MANUALLY EDIT SOURCES IN THE [`generated`] DIRECTORY! :warning: __
+__:warning:NEVER MANUALLY EDIT SOURCES IN THE [`generated`] DIRECTORY! :warning:__
 
 
 ---
@@ -142,7 +143,7 @@ __ :warning:NEVER MANUALLY EDIT SOURCES IN THE [`generated`] DIRECTORY! :warning
 
 [GHA CI img]: https://github.com/zbeekman/ZstdFortranLib/workflows/CI/badge.svg "CI build status badge"
 [GH Actions CI]: https://github.com/zbeekman/ZstdFortranLib/actions "GH Actions CI"
-    [Test Coverage img]: https://codecov.io/gh/zbeekman/ZstdFortranLib/branch/develop/graph/badge.svg?flag=unittest_core "Codecov badge"
+[Test Coverage img]: https://codecov.io/gh/zbeekman/ZstdFortranLib/branch/master/graph/badge.svg?flag=unittest_core "Codecov badge"
 [Code Coverage]: https://codecov.io/gh/zbeekman/ZstdFortranLib/branch/develop "Code Coverage"
 [Docs img]: https://readthedocs.org/projects/zstdfortranlib/badge/?version=latest "RTD badge"
 [Documentation]: https://zstdfortranlib.readthedocs.io/en/latest/?badge=latest "High level documentation"
