@@ -143,29 +143,30 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: |
         pipenv run unit_test
-        "${GITHUB_WORKSPACE}/codecov" -c -v \
+        "${GITHUB_WORKSPACE}/codecov" -c \
           -x gcov-${GCC_V} \
           -p ${GITHUB_WORKSPACE} \
           -F unittest_extern \
           -G '*/extern/*' \
           -g '*/test/*' \
           -n "GHA-GCC${GCC_V}-${{ runner.os }}-unittest-extern"
-        "${GITHUB_WORKSPACE}/codecov" -c -v \
+        find "${BUILD_DIR}" -type f -path '*/extern/*' -name '*.*.gc*' -print -exec rm {} \; || true
+        "${GITHUB_WORKSPACE}/codecov" -c \
           -x gcov-${GCC_V} \
           -p ${GITHUB_WORKSPACE} \
           -F unittest_tests \
           -G '*/test/*' \
           -g '*/extern/*' \
           -n "GHA-GCC${GCC_V}-${{ runner.os }}-unittest-tests"
-        ! find "${BUILD_DIR}" -type f -name '*_test.*.gc*' -print -exec rm {} \;
-        "${GITHUB_WORKSPACE}/codecov" -c -v \
+        find "${BUILD_DIR}" -type f -name '*_test.*.gc*' -print -exec rm {} \; || true
+        "${GITHUB_WORKSPACE}/codecov" -c \
           -x gcov-${GCC_V} \
           -p ${GITHUB_WORKSPACE} \
           -F unittest_core \
           -g '*/test/*'
           -g '*/extern/*' \
           -n "GHA-GCC${GCC_V}-${{ runner.os }}-unittest-core"
-        ! find "${BUILD_DIR}" -name '*.*.gc*' -print -exec rm {} \;
+        find "${BUILD_DIR}" -name '*.*.gc*' -print -exec rm {} \; || true
 
     - name: integration test
       run: |
