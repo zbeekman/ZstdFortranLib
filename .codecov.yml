@@ -42,11 +42,38 @@ coverage:
           - "*/generated/GNU/test/*.[Ff]90"
           - "*/src/test/*.[Ff]90"
           - "*/src/test/*.c"
-    # patch:
-    #   default: on
-    #   unittest_core: *unit_core
-    #   unittest_extern: *unit_extern
-    #   unittest_tests: *unit_tests
+    patch:
+      default: on
+      unittest_core:
+        flags: unittest_core
+        target: 95%
+        paths:
+          - "!*/test/*"
+          - "!*/extern/*"
+          - "!*_test.[Ff]90"
+          - "!*_test.c"
+          - "*/generated/GNU/*.[Ff]90"
+          - "*/src/*.[Ff]90"
+          - "*/src/*.c"
+          - "*/src/c_interfaces/*.c"
+      unittest_extern:
+        flags: unittest_extern
+        target: auto
+        threshold: 5%
+        paths:
+          - "*/extern/*"
+      unittest_tests:
+        flags: unittest_tests
+        target: auto
+        threshold: 2%
+        paths:
+          - "*/test/*.[Ff]90"
+          - "*/test/*.c"
+          - "*_test.[Ff]90"
+          - "*_test.c"
+          - "*/generated/GNU/test/*.[Ff]90"
+          - "*/src/test/*.[Ff]90"
+          - "*/src/test/*.c"
 
     # changes:
     #   default: off
