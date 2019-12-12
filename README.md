@@ -143,7 +143,7 @@ __:warning:NEVER MANUALLY EDIT SOURCES IN THE [`generated`] DIRECTORY! :warning:
 
 [GHA CI img]: https://github.com/zbeekman/ZstdFortranLib/workflows/CI/badge.svg "CI build status badge"
 [GH Actions CI]: https://github.com/zbeekman/ZstdFortranLib/actions "GH Actions CI"
-    [Test Coverage img]: https://codecov.io/gh/zbeekman/ZstdFortranLib/branch/develop/graph/badge.svg?flag=unittest_core "Codecov badge"
+[Test Coverage img]: https://codecov.io/gh/zbeekman/ZstdFortranLib/branch/develop/graph/badge.svg?flag=unittest_core "Codecov badge"
 [Code Coverage]: https://codecov.io/gh/zbeekman/ZstdFortranLib/branch/develop "Code Coverage"
 [Docs img]: https://readthedocs.org/projects/zstdfortranlib/badge/?version=latest "RTD badge"
 [Documentation]: https://zstdfortranlib.readthedocs.io/en/latest/?badge=latest "High level documentation"
