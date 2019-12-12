@@ -1,5 +1,5 @@
 ignore:
-  - "generated/GNU/testing.F90"
+  - "testing.F90"
 
 codecov:
   require_ci_to_pass: yes
@@ -12,61 +12,75 @@ coverage:
   status:
     project:
       default: off
-      unittest_core: &unit_core
+      unittest_core:
         flags: unittest_core
         target: 95%
-        paths: &core_paths
-          - generated/GNU/*.F90
-          - generated/GNU/*.f90
-          - src/*.F90
-          - src/*.f90
-          - src/*.c
-          - src/c_interfaces/*.c
-      unittest_extern: &unit_extern
+        paths:
+          - "!*/test/*"
+          - "!*/extern/*"
+          - "!*_test.[Ff]90"
+          - "!*_test.c"
+          - "*/generated/GNU/*.[Ff]90"
+          - "*/src/*.[Ff]90"
+          - "*/src/*.c"
+          - "*/src/c_interfaces/*.c"
+      unittest_extern:
         flags: unittest_extern
         target: auto
         threshold: 5%
-        paths: &extern_paths
-          - extern/**/*.*
-      unittest_tests: &unit_tests
+        paths:
+          - "*/extern/*"
+      unittest_tests:
         flags: unittest_tests
         target: auto
         threshold: 2%
-        paths: &tests_paths
-          - "**/test/*.F90"
-          - "**/test/*.f90"
-          - "**/test/*.c"
-          - "**/*_test.F90"
-          - "**/*_test.f90"
-          - "**/*_test.c"
-          - generated/GNU/test/*.F90
-          - generated/GNU/test/*.f90
-          - src/test/*.f90
-          - src/test/*.F90
-          - src/test/*.c
-    patch:
-      default: on
-      unittest_core: *unit_core
-      unittest_extern: *unit_extern
-      unittest_tests: *unit_tests
+        paths:
+          - "*/test/*.[Ff]90"
+          - "*/test/*.c"
+          - "*_test.[Ff]90"
+          - "*_test.c"
+          - "*/generated/GNU/test/*.[Ff]90"
+          - "*/src/test/*.[Ff]90"
+          - "*/src/test/*.c"
+    # patch:
+    #   default: on
+    #   unittest_core: *unit_core
+    #   unittest_extern: *unit_extern
+    #   unittest_tests: *unit_tests
 
-    changes:
-      default: off
-      unittest_core: *unit_core
-      unittest_extern: *unit_extern
-      unittest_tests: *unit_tests
+    # changes:
+    #   default: off
+    #   unittest_core: *unit_core
+    #   unittest_extern: *unit_extern
+    #   unittest_tests: *unit_tests
 
 flags:
   # filter the folder(s) you wish to measure by that flag
   unittest_core:
-    paths: *core_paths
+    paths:
+      - "!*/test/*"
+      - "!*/extern/*"
+      - "!*_test.[Ff]90"
+      - "!*_test.c"
+      - "*/generated/GNU/*.[Ff]90"
+      - "*/src/*.[Ff]90"
+      - "*/src/*.c"
+      - "*/src/c_interfaces/*.c"
   unittest_extern:
-    paths: *extern_paths
+    paths:
+      - "*/extern/*"
   unittest_tests:
-    paths: *tests_paths
+    paths:
+      - "*/test/*.[Ff]90"
+      - "*/test/*.c"
+      - "*_test.[Ff]90"
+      - "*_test.c"
+      - "*/generated/GNU/test/*.[Ff]90"
+      - "*/src/test/*.[Ff]90"
+      - "*/src/test/*.c"
 
 comment:
   layout: "reach, diff, flags, files"
   behavior: default
   branches: [master, develop]
-  after_n_builds: 6
+  after_n_builds: 9
