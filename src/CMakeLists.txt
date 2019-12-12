@@ -12,7 +12,15 @@ generate_and_add_sources(
   testing_interface.F90
   # error_types.F90
   )
-target_sources(zstdfortran PUBLIC $<TARGET_OBJECTS:FACE> PUBLIC $<TARGET_OBJECTS:c_env_interface>)
+target_sources(
+  zstdfortran
+  PUBLIC
+  $<TARGET_OBJECTS:FACE>
+  PUBLIC
+  $<TARGET_OBJECTS:functional-fortran>
+  PUBLIC
+  $<TARGET_OBJECTS:c_env_interface>
+  )
 
 # Should do something better/more clever here
 target_link_libraries(zstdfortran PRIVATE FACE)

@@ -1,0 +1,3 @@
+[submodule "functional-fortran"]
+	path = extern/functional-fortran
+	url = ../../wavebitscientific/functional-fortran.git

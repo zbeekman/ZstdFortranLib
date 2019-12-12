@@ -41,10 +41,7 @@ include(Jin2For)
 include(TargetCreator)
 
 # Add external projects
-set(EXTERNALS FACE)
-foreach(external ${EXTERNALS})
-  include(${CMAKE_CURRENT_LIST_DIR}/extern/${external}/CMakeLists.txt)
-endforeach()
+include(${CMAKE_CURRENT_LIST_DIR}/extern/CMakeLists.txt)
 
 add_subdirectory(src)
 
