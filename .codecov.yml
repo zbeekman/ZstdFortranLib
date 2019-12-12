@@ -1,5 +1,5 @@
 ignore:
-  - "testing.F90"
+  - "*/generated/GNU/testing.F90"
 
 codecov:
   require_ci_to_pass: yes
