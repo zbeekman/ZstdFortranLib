@@ -29,7 +29,7 @@ coverage:
       unittest_tests:
         flags: unittest_tests
         target: auto
-        threshold: 2%
+        threshold: 2
         paths:
           - "*/test/*.[Ff]90"
           - "*/test/*.c"
@@ -42,7 +42,7 @@ coverage:
       default: on
       unittest_core:
         flags: unittest_core
-        target: 95%
+        target: 60%
         paths:
           - "!*/test/*"
           - "!*/extern/*"
@@ -56,7 +56,7 @@ coverage:
       unittest_tests:
         flags: unittest_tests
         target: auto
-        threshold: 2%
+        threshold: 2
         paths:
           - "*/test/*.[Ff]90"
           - "*/test/*.c"
