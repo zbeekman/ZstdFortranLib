@@ -11,11 +11,9 @@ get_tty_rows ()
   struct winsize win;
   int flun = get_connected_tty_lun ();
 
-  if (flun < 0)
+  if (flun < 0 || ioctl (flun, TIOCGWINSZ, &win) < 0) //! OCLINT
     return 0;
 
-  /* Get window size of terminal. */
-  ioctl (flun, TIOCGWINSZ, &win);
   return (int) win.ws_row;
 }
 
@@ -25,10 +23,8 @@ get_tty_cols ()
   struct winsize win;
   int flun = get_connected_tty_lun ();
 
-  if (flun < 0)
+  if (flun < 0 || ioctl (flun, TIOCGWINSZ, &win) < 0) //! OCLINT
     return 0;
 
-  /* Get window size of terminal. */
-  ioctl (flun, TIOCGWINSZ, &win);
   return (int) win.ws_col;
 }
