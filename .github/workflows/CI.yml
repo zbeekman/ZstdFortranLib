@@ -144,7 +144,6 @@ jobs:
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: |
-        tput cols
         pipenv run unit_test
         find "${BUILD_DIR}" -type f -path '*/extern/*' -name '*.*.gc*' -print -exec rm {} \; || true
         "${GITHUB_WORKSPACE}/codecov" -c \
