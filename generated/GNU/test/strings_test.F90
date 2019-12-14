@@ -8,7 +8,7 @@ program test_string_mod
 
   ! Give us a fighting chance of getting the filename into 132 characters
   character(len=*), parameter :: THIS_FILE = &
-    __FILE__
+    _FILE_
 
   character(kind=1,len=*), parameter :: &
     qbf_c1 = 1_"the quick brown fox jumped over the lazy dog"

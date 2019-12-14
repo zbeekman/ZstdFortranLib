@@ -12,7 +12,7 @@ program testing_test
   implicit none
 
   character(len=*), parameter :: file = &
-    __FILE__
+    _FILE_
   {%- for t in real_types %}
   integer, parameter :: {{t.alias}} = {{t.kind}}
   real(kind={{t.alias}}), parameter :: tolerance_{{t.alias}} = 10.0_{{t.alias}}

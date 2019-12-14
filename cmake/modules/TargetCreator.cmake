@@ -20,6 +20,18 @@ install(
   PATTERN "*.smod"
   )
 
+function(add_file_relpath_define)
+  # Add _FILE_ compile definition with source path relative to ${PROJECT_SOURCE_DIR}
+  foreach(file IN LISTS ARGN)
+    file(RELATIVE_PATH FILE_PATH ${PROJECT_SOURCE_DIR} ${file})
+    set_property(
+      SOURCE ${file}
+      APPEND
+      PROPERTY COMPILE_DEFINITIONS _FILE_="${FILE_PATH}"
+      )
+  endforeach()
+endfunction()
+
 # Function to add targets and setup tests in a sane way for Fortran
 function(add_Fortran_lib lib_name)
 
@@ -29,6 +41,7 @@ function(add_Fortran_lib lib_name)
     PUBLIC $<BUILD_INTERFACE:${CMAKE_Fortran_MODULE_DIRECTORY}>
     INTERFACE $<INSTALL_INTERFACE:${MODULE_INSTALL_DIR}>
     )
+  add_file_relpath_define(${ARGN})
   set_target_properties(${lib_name} PROPERTIES LINKER_LANGUAGE Fortran)
   add_library(${PROJECT_NAME}::${lib_name} ALIAS ${lib_name})
 
@@ -49,7 +62,7 @@ function(add_Fortran_lib lib_name)
 endfunction()
 
 function(map_src_to_generated GENERATED INPUT)
-  # Generate sources from the templates directory
+  # Map template sources to generated output sources
   set(OUTPUT_DIR ${PROJECT_SOURCE_DIR}/generated/${CMAKE_Fortran_COMPILER_ID})
   if(NOT EXISTS ${OUTPUT_DIR})
     message(STATUS "Creating generated/${CMAKE_Fortran_COMPILER_ID} directory in source tree.")
@@ -76,12 +89,14 @@ function(map_src_to_generated GENERATED INPUT)
 endfunction()
 
 function(generate_and_add_sources target)
+  # Generate sources from the templates directory
   foreach(source ${ARGN})
     get_filename_component(ABS_SRC ${source} ABSOLUTE)
     map_src_to_generated(GENERATED_SOURCE ${ABS_SRC})
     message(STATUS "Generating ${GENERATED_SOURCE} from ${source}")
     jin2for(${GENERATED_SOURCE} ${ABS_SRC})
     target_sources(${target} PRIVATE ${GENERATED_SOURCE})
+    add_file_relpath_define(${GENERATED_SOURCE})
   endforeach()
 endfunction()
 
@@ -140,6 +155,7 @@ function(add_targets_tests target)
       if(${target_name_wle}_test STREQUAL ${test_name})
         message(STATUS "Adding executable: ${test_name}")
         add_executable(${test_name} ${test})
+        add_file_relpath_define(${test})
         target_link_libraries(${test_name} PRIVATE ${target})
         message(STATUS "Adding test: ${test_name}")
         add_test(NAME ${test_name} COMMAND $<TARGET_FILE:${test_name}>)
@@ -170,6 +186,7 @@ function(add_targets_tests target)
               set(test_src ${candidate})
             endif()
             add_executable(${src_name}_test ${test_src})
+            add_file_relpath_define(${test_src})
             target_include_directories(${src_name}_test PRIVATE ${CMAKE_Fortran_MODULE_DIRECTORY})
             target_link_libraries(${src_name}_test PRIVATE ${target})
             message(STATUS "Adding test: ${src_name}_test")

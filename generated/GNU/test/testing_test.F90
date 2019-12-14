@@ -13,7 +13,7 @@ program testing_test
   implicit none
 
   character(len=*), parameter :: file = &
-    __FILE__
+    _FILE_
   integer, parameter :: r4 = 4
   real(kind=r4), parameter :: tolerance_r4 = 10.0_r4
   real(kind=r4), parameter :: rtolerance_r4 = tolerance_r4/100
