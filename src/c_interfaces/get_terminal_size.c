@@ -12,14 +12,15 @@ get_tty_rows ()
   struct winsize win;
   int flun;
 
+  char *tty_name = ttyname (STDIN_FILENO);
   /* Open the controlling terminal. */
-  flun = open ("/dev/tty", O_RDWR);
+  flun = open (tty_name, O_RDWR);
   if (flun < 0)
-    err (1, "/dev/tty");
+    err (1, "%s", tty_name);
 
   /* Get window size of terminal. */
   if (ioctl (flun, TIOCGWINSZ, &win) < 0) //! OCLINT(Not a bitwise &)
-    err (1, "/dev/tty");
+    err (1, "%s", tty_name);
 
   n_rows = (int) win.ws_row;
   close (flun);
@@ -32,14 +33,15 @@ get_tty_cols ()
   struct winsize win;
   int flun;
 
+  char *tty_name = ttyname (STDIN_FILENO);
   /* Open the controlling terminal. */
-  flun = open ("/dev/tty", O_RDWR);
+  flun = open (tty_name, O_RDWR);
   if (flun < 0)
-    err (1, "/dev/tty");
+    err (1, "%s", tty_name);
 
   /* Get window size of terminal. */
   if (ioctl (flun, TIOCGWINSZ, &win) < 0) //! OCLINT(Not a bitwise &)
-    err (1, "/dev/tty");
+    err (1, "%s", tty_name);
 
   n_cols = (int) win.ws_col;
   close (flun);
