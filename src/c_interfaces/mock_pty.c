@@ -6,7 +6,13 @@
 #include <stdlib.h>
 #include <sysexits.h>
 #include <unistd.h>
-#include "util.h"
+#include <stdio.h>
+#include <errno.h>
+#ifdef __linux__
+#include <pty.h>
+#else
+#include <util.h>
+#endif
 
 pid_t child = 0;
 
