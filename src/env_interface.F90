@@ -13,7 +13,7 @@ module zsfl_env_interface
   type system_t
     private
     logical :: is_initialized = .false.
-    integer :: TTY_LINES = 0, TTY_COLUMNS = 0, ENV_LINES = 0, ENV_COLUMNS = 0
+    integer :: TTY_LINES = 0, TTY_COLUMNS = 0
     integer :: stdout = output_unit, stderr = error_unit, stdin = input_unit
     logical :: IS_A_TTY = .false.
     character(len=:), allocatable :: DISPLAY, HOME, LANG, LC_ALL, PATH, PWD, SHELL, SHLVL, TERM, TMPDIR, USER
@@ -46,8 +46,8 @@ contains
     if ( this%is_a_tty ) then
       write(this%stdout, '(2x,A)') """IS_A_TTY"": true,"
       write(this%stdout, '(*(2x,"""",(A),""": ",(I0),",",:,/))') &
-        "COLUMNS", max(this%tty_columns, this%env_columns), &
-        "LINES", max(this%tty_lines, this%env_lines)
+        "COLUMNS", max(this%tty_columns, 0), &
+        "LINES", max(this%tty_lines, 0)
     else
       write(this%stdout, '(2x,A)') """IS_A_TTY"": false,"
       if(.envExists. "LINES") write(this%stdout, '(2x,A)') """LINES"": " // this%env("LINES") // ","
@@ -83,20 +83,6 @@ contains
     this%IS_A_TTY    = term_is_a_tty()
     this%TTY_LINES   = get_tty_rows()
     this%TTY_COLUMNS = get_tty_cols()
-
-    ! Environment variables that need to be converted to integers
-    if(.envExists. "LINES") then
-      lines_str = this%env("LINES")
-      read(lines_str,*) this%ENV_LINES
-    else
-      this%ENV_LINES = 0
-    end if
-    if(.envExists. "COLUMNS") then
-      columns_str = this%env("COLUMNS")
-      read(columns_str,*) this%ENV_COLUMNS
-    else
-      this%ENV_COLUMNS = 0
-    end if
 
     ! Environment variables that are strings
     this%DISPLAY = this%env("DISPLAY")
