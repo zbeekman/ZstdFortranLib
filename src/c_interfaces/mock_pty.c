@@ -8,7 +8,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #ifdef __linux__
-#include <libutil.h>
+#include <errno.h>
+#include <pty.h>
 #else
 #include <util.h>
 #endif
