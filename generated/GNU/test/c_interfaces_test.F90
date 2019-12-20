@@ -1,18 +1,27 @@
-program test_c_interfaces
+program c_interfaces_test
+  !! category: testing
+  !! author: Izaak Beekman
+  !!
+  !! Unit test for the c_env_interfaces module
+
+  use zsfl_testing, only: unit_test_t
   use zsfl_c_system_interface, only: is_a_tty, get_tty_rows, get_tty_cols
   implicit none
+
+  character(len=*), parameter :: file = &
+    _FILE_
   integer :: rows, cols
-  logical :: passing = .true.
+  type(unit_test_t) :: test
+
+  call test%initialize(file)
 
   rows = get_tty_rows()
   cols = get_tty_cols()
   write(*,*) "Rows: ", rows
   write(*,*) "Cols: ", cols
-  passing = passing .and. rows >= 0 .and. cols >= 0
+  test = rows >= 0
+  test = cols >= 0
+  write(*,*) "Is a tty? : ", is_a_tty()
 
-  if(passing) then
-    write(*,'(A)') "Test passed."
-  else
-    write(*,'(A)') "Test failed."
-  endif
+  call test%report_status()
 end program

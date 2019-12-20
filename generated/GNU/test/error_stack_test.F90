@@ -1,21 +1,31 @@
-program main
-  use, intrinsic :: iso_fortran_env, only: stdout => output_unit, stderr => error_unit
-  use zsfl_error_stack
+program error_stack_test
+  !! category: testing
+  !! author: Izaak Beekman
+  !!
+  !! Unit test for the c_env_interfaces module
 
+  use, intrinsic :: iso_fortran_env, only: stdout => output_unit, stderr => error_unit
+  use zsfl_testing, only: unit_test_t
+  use zsfl_error_stack
   implicit none
-  logical :: test_failed = .false.
+
+  character(len=*), parameter :: file = &
+    _FILE_
 
   integer :: tty_dims(2) = [-1, -1], i
+  type(unit_test_t) :: test
+
+  call test%initialize(file)
 
   do i = 1,2
-     test_failed = test_failed .or. tty_dims(i) >= 0
+     test = .not. tty_dims(i) >= 0
   end do
 
 
   tty_dims = get_terminal_dims()
 
   do i = 1,2
-     test_failed = test_failed .or. tty_dims(i) < 0
+     test = tty_dims(i) >= 0
   end do
 
   print*, tty_dims
@@ -24,9 +34,5 @@ program main
   call print_terminal_dims(stdout)
   call print_terminal_dims(stderr)
 
-  if ( test_failed ) then
-     stop 1
-  else
-     stop 0
-  end if
+  call test%report_status()
 end program
