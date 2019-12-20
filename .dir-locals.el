@@ -1,0 +1,5 @@
+((nil . ((projectile-project-configure-cmd . "pipenv run configure")
+          (projectile-project-compilation-cmd . "pipenv run build")
+          (projectile-project-test-cmd . "pipenv run test")
+          (projectile-project-name . "ZstdFortranLib")
+          )))
