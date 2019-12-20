@@ -7,9 +7,8 @@
 #include <sysexits.h>
 #include <unistd.h>
 #include <stdio.h>
-#include <errno.h>
 #ifdef __linux__
-#include <pty.h>
+#include <libutil.h>
 #else
 #include <util.h>
 #endif
