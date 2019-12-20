@@ -56,14 +56,14 @@ forward_output (int parent_pid)
 }
 
 int
-main (int argc, char *argv[])
+main (int argc, char *argv[]) //! OCLINT
 {
   // Run a command in a pty.
   // Usage: /path/to/this/binary command to run
-  if (argc < 2)
-    {
-      return EX_USAGE;
-    }
+  /* if (argc < 2) */
+  /*   { */
+  /*     return EX_USAGE; */
+  /*   } */
 
   int master;
   child = forkpty (&master, NULL, NULL, NULL);
