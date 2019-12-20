@@ -30,6 +30,7 @@ build = "bash -c \"cd \\\"$(pipenv --where)\\\"; cmake --build \\\"${BUILD_DIR:-
 clean_build = "bash -c \"cd \\\"$(pipenv --where)\\\"; cmake --build \\\"${BUILD_DIR:-./build}\\\" --clean-first --parallel ${CMAKE_BUILD_PARALLEL_LEVEL:-${NCPU:-$(ncpu || echo 8)}} -- -k ; exit $?\""
 verbose_build = "bash -c \"cd \\\"$(pipenv --where)\\\"; VERBOSE=1 cmake --build \\\"${BUILD_DIR:-./build}\\\" -- -k ; exit $?\""
 install = "bash -c \"cd \\\"$(pipenv --where)\\\"; cmake --install \\\"${BUILD_DIR:-./build}\\\" ; exit $?\""
+test = "bash -c \"cd \\\"${BUILD_DIR:-$(pipenv --where)/build}\\\" ; ctest --output-on-failure --schedule-random ; exit $?\""
 unit_test = "bash -c \"cd \\\"${BUILD_DIR:-$(pipenv --where)/build}\\\" ; ctest --output-on-failure --schedule-random -L unit ; exit $?\""
 integration_test = "bash -c \"cd \\\"${BUILD_DIR:-$(pipenv --where)/build}\\\" ; ctest --output-on-failure --schedule-random -LE unit ; exit $?\""
 nuke_build = "bash -c \"rm -rf \\\"${BUILD_DIR:-$(pipenv --where)/build}\\\"\""
