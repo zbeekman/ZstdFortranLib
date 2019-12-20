@@ -12,7 +12,8 @@ coverage:
   range: "60...98"
   status:
     project:
-      default: off
+      default:
+        target: 90%
       unittest_core:
         flags: unittest_core
         target: 95%
@@ -39,7 +40,8 @@ coverage:
           - "*/src/test/*.[Ff]90"
           - "*/src/test/*.c"
     patch:
-      default: on
+      default:
+        target: 55%
       unittest_core:
         flags: unittest_core
         target: 60%
@@ -98,4 +100,3 @@ comment:
   layout: "reach, diff, flags, files"
   behavior: default
   branches: [master, develop]
-  after_n_builds: 12
