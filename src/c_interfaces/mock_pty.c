@@ -7,12 +7,7 @@
 #include <sysexits.h>
 #include <unistd.h>
 #include <stdio.h>
-#ifdef __linux__
-#include <errno.h>
-#include <pty.h>
-#else
 #include <util.h>
-#endif
 
 pid_t child = 0;
 
