@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <sysexits.h>
 #include <unistd.h>
-#include <util.h>
+#include "util.h"
 
 pid_t child = 0;
 
