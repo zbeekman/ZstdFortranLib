@@ -1,5 +1,5 @@
 ignore:
-  - "**/GNU/testing.F*"
+  - "testing.F90*"
   - "**/extern/**"
 
 codecov:
@@ -22,7 +22,7 @@ coverage:
           - "!*/extern/*"
           - "!*_test.[Ff]90"
           - "!*_test.c"
-          - "!*/GNU/testing.F90"
+          - "!*/GNU/testing.F90*"
           - "*/generated/GNU/*.[Ff]90"
           - "*/src/*.[Ff]90"
           - "*/src/*.c"
@@ -81,7 +81,7 @@ flags:
       - "!*/extern/*"
       - "!*_test.[Ff]90"
       - "!*_test.c"
-      - "!*/GNU/testing.F90"
+      - "!*/GNU/testing.F90*"
       - "*/generated/GNU/*.[Ff]90"
       - "*/src/*.[Ff]90"
       - "*/src/*.c"
