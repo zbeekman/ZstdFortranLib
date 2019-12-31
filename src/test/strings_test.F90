@@ -228,8 +228,8 @@ call use_color(.true.)
   end associate
 
   write(stdout,"(A)") ""
-  {%- for prop in ["   tiny", "epsilon", "   huge"] %}
-  write(stdout,"(A8,A8,A)") "{{t.decl}}", "{{prop}}", ": " // {{prop}}(1.0_{{t.kind}})
+  {%- for prop in ["     tiny", "  epsilon", "     huge", "precision", "    range", "    radix"] %}
+  write(stdout,"(A8,A10,A)") "{{t.decl}}", "{{prop}}", ": " // {{prop}}(1.0_{{t.kind}})
   {%- endfor %}
   write(stdout,"(A)") ""
 {% endfor %}

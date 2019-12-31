@@ -615,9 +615,12 @@ call use_color(.true.)
   end associate
 
   write(stdout,"(A)") ""
-  write(stdout,"(A8,A8,A)") "real(4)", "   tiny", ": " //    tiny(1.0_4)
-  write(stdout,"(A8,A8,A)") "real(4)", "epsilon", ": " // epsilon(1.0_4)
-  write(stdout,"(A8,A8,A)") "real(4)", "   huge", ": " //    huge(1.0_4)
+  write(stdout,"(A8,A10,A)") "real(4)", "     tiny", ": " //      tiny(1.0_4)
+  write(stdout,"(A8,A10,A)") "real(4)", "  epsilon", ": " //   epsilon(1.0_4)
+  write(stdout,"(A8,A10,A)") "real(4)", "     huge", ": " //      huge(1.0_4)
+  write(stdout,"(A8,A10,A)") "real(4)", "precision", ": " // precision(1.0_4)
+  write(stdout,"(A8,A10,A)") "real(4)", "    range", ": " //     range(1.0_4)
+  write(stdout,"(A8,A10,A)") "real(4)", "    radix", ": " //     radix(1.0_4)
   write(stdout,"(A)") ""
 
   associate(msg => "unexpected value calling `to_s()` on real(8)")
@@ -629,9 +632,12 @@ call use_color(.true.)
   end associate
 
   write(stdout,"(A)") ""
-  write(stdout,"(A8,A8,A)") "real(8)", "   tiny", ": " //    tiny(1.0_8)
-  write(stdout,"(A8,A8,A)") "real(8)", "epsilon", ": " // epsilon(1.0_8)
-  write(stdout,"(A8,A8,A)") "real(8)", "   huge", ": " //    huge(1.0_8)
+  write(stdout,"(A8,A10,A)") "real(8)", "     tiny", ": " //      tiny(1.0_8)
+  write(stdout,"(A8,A10,A)") "real(8)", "  epsilon", ": " //   epsilon(1.0_8)
+  write(stdout,"(A8,A10,A)") "real(8)", "     huge", ": " //      huge(1.0_8)
+  write(stdout,"(A8,A10,A)") "real(8)", "precision", ": " // precision(1.0_8)
+  write(stdout,"(A8,A10,A)") "real(8)", "    range", ": " //     range(1.0_8)
+  write(stdout,"(A8,A10,A)") "real(8)", "    radix", ": " //     radix(1.0_8)
   write(stdout,"(A)") ""
 
   associate(msg => "unexpected value calling `to_s()` on real(10)")
@@ -643,9 +649,12 @@ call use_color(.true.)
   end associate
 
   write(stdout,"(A)") ""
-  write(stdout,"(A8,A8,A)") "real(10)", "   tiny", ": " //    tiny(1.0_10)
-  write(stdout,"(A8,A8,A)") "real(10)", "epsilon", ": " // epsilon(1.0_10)
-  write(stdout,"(A8,A8,A)") "real(10)", "   huge", ": " //    huge(1.0_10)
+  write(stdout,"(A8,A10,A)") "real(10)", "     tiny", ": " //      tiny(1.0_10)
+  write(stdout,"(A8,A10,A)") "real(10)", "  epsilon", ": " //   epsilon(1.0_10)
+  write(stdout,"(A8,A10,A)") "real(10)", "     huge", ": " //      huge(1.0_10)
+  write(stdout,"(A8,A10,A)") "real(10)", "precision", ": " // precision(1.0_10)
+  write(stdout,"(A8,A10,A)") "real(10)", "    range", ": " //     range(1.0_10)
+  write(stdout,"(A8,A10,A)") "real(10)", "    radix", ": " //     radix(1.0_10)
   write(stdout,"(A)") ""
 
   associate(msg => "unexpected value calling `to_s()` on real(16)")
@@ -657,9 +666,12 @@ call use_color(.true.)
   end associate
 
   write(stdout,"(A)") ""
-  write(stdout,"(A8,A8,A)") "real(16)", "   tiny", ": " //    tiny(1.0_16)
-  write(stdout,"(A8,A8,A)") "real(16)", "epsilon", ": " // epsilon(1.0_16)
-  write(stdout,"(A8,A8,A)") "real(16)", "   huge", ": " //    huge(1.0_16)
+  write(stdout,"(A8,A10,A)") "real(16)", "     tiny", ": " //      tiny(1.0_16)
+  write(stdout,"(A8,A10,A)") "real(16)", "  epsilon", ": " //   epsilon(1.0_16)
+  write(stdout,"(A8,A10,A)") "real(16)", "     huge", ": " //      huge(1.0_16)
+  write(stdout,"(A8,A10,A)") "real(16)", "precision", ": " // precision(1.0_16)
+  write(stdout,"(A8,A10,A)") "real(16)", "    range", ": " //     range(1.0_16)
+  write(stdout,"(A8,A10,A)") "real(16)", "    radix", ": " //     radix(1.0_16)
   write(stdout,"(A)") ""
 
 
