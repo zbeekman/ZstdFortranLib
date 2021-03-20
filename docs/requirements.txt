@@ -16,7 +16,7 @@ identify==1.4.7
 idna==2.8
 importlib-metadata==1.1.0 ; python_version < '3.8'
 jin2for==0.1.0
-jinja2==2.10.3
+jinja2==2.11.3
 jsmin==2.2.2
 livereload==2.6.1
 lxml==4.4.2
