@@ -36,7 +36,7 @@ pep562==1.0
 pre-commit==1.20.0
 pygments==2.5.2
 pymdown-extensions==6.2
-pyyaml==5.2
+pyyaml==5.4
 requests==2.22.0
 six==1.13.0
 smmap2==2.0.5
