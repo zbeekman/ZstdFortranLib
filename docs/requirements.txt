@@ -19,7 +19,7 @@ jin2for==0.1.0
 jinja2==2.10.3
 jsmin==2.2.2
 livereload==2.6.1
-lxml==4.4.2
+lxml==4.6.3
 markdown==3.1.1
 markdown-include==0.5.1
 markupsafe==1.1.1
